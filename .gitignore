@@ -48,6 +48,11 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.txt
+*.zip
+*.rar
+*.7z
+*.tar
 
 *.DS_Store
 
