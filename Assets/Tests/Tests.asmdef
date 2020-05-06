@@ -3,7 +3,9 @@
     "references": [
         "Game",
         "Zenject-TestFramework",
-        "Zenject"
+        "Zenject",
+        "Infrastructure",
+        "Domain"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

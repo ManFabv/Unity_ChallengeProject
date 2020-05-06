@@ -10,6 +10,7 @@ public class JSonLoaderServiceTests : ZenjectUnitTestFixture
     public void CommonInstall()
     {
         Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
+        Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
         _loaderService = Container.Resolve<ILoaderService>();
     }
 

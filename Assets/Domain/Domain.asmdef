@@ -1,9 +1,7 @@
 {
-    "name": "Game",
+    "name": "Domain",
     "references": [
-        "Zenject",
-        "Infrastructure",
-        "Domain"
+        "Infrastructure"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

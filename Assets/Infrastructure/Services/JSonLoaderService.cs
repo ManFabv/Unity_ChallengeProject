@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class JSonLoaderService : ILoaderService 
 {
-    private string LoadJsonFileFromResources(string fileName)
+    private readonly IReader _reader;
+
+    [Inject]
+    public JSonLoaderService(IReader reader)
     {
-        var targetFile = Resources.Load<TextAsset>(fileName);
-        return targetFile.text;
+        _reader = reader;
     }
 
     public T Read<T>(string fileName)
     {
-        var json = LoadJsonFileFromResources(fileName);
+        var json = _reader.Read(fileName);
         var result = JsonUtility.FromJson<T>(json);
         return result;
     }
