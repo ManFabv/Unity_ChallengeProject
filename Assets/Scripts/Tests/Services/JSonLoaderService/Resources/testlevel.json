@@ -1,0 +1,12 @@
+{
+  "Tiles": [
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Infrastructure",
+    "references": [
+        "Zenject",
+        "Domain"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
