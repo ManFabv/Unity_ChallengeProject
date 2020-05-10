@@ -3,7 +3,7 @@
 public class GridLevel : ILevel
 {
     private readonly ILoaderService _loaderService;
-    private LevelTileData Tiles;
+    private LevelTileData TilesData;
 
     [Inject]
     public GridLevel(ILoaderService loaderService)
@@ -11,10 +11,12 @@ public class GridLevel : ILevel
         _loaderService = loaderService;
     }
 
-    public void LoadLevel(string path)
+    public void LoadLevel(string pathToLevel)
     {
-        Tiles = _loaderService.Read<LevelTileData>(path);
+        TilesData = _loaderService.Read<LevelTileData>(pathToLevel);
     }
 
-    public bool IsLoaded => Tiles?.LevelTilesCount > 0;
+    public bool IsLoaded => TilesCount > 0;
+
+    public int TilesCount => TilesData?.Tiles?.Length ?? 0;
 }

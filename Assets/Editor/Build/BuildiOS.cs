@@ -22,6 +22,6 @@ public class BuildiOS : MonoBehaviour
             }
         }
 
-        BuildPipeline.BuildPlayer(scenes.ToArray(), "Build\\UnityGitlabTestiOSProj", BuildTarget.iOS, BuildOptions.None);
+        BuildPipeline.BuildPlayer(scenes.ToArray(), "Build\\iOS\\UnityGitlabTestiOSProj", BuildTarget.iOS, BuildOptions.None);
     }
 }

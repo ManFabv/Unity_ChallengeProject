@@ -10,6 +10,8 @@ public class GridLevelTests : ZenjectUnitTestFixture
     [SetUp]
     public void CommonInstall()
     {
+        Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
+        Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
         Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
         Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
         _loaderService = Container.Resolve<ILoaderService>();

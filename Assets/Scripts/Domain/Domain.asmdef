@@ -1,8 +1,6 @@
 {
     "name": "Domain",
-    "references": [
-        "Infrastructure"
-    ],
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

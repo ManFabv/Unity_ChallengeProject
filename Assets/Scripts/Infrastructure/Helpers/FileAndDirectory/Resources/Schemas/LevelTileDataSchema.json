@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "Tiles": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "Cost": {
+              "type": "integer"
+            },
+            "Position": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "Cost",
+            "Position"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "Cost": {
+              "type": "integer"
+            },
+            "Position": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "Cost",
+            "Position"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "Tiles"
+  ]
+}

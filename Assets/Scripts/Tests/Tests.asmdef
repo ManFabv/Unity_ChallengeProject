@@ -1,11 +1,11 @@
 {
     "name": "Tests",
     "references": [
-        "Game",
         "Zenject-TestFramework",
         "Zenject",
-        "Infrastructure",
-        "Domain"
+        "Game",
+        "Domain",
+        "Infrastructure"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
@@ -14,7 +14,7 @@
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": false,
+    "allowUnsafeCode": true,
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
