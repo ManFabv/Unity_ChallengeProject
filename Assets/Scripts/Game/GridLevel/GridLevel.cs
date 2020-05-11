@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
 
-public class GridLevel : ILevel
+public class GridLevel : ILevel 
 {
     private readonly ILoaderService _loaderService;
-    private LevelTileData TilesData;
+    private LevelTileData TilesData = new LevelTileData();
 
     [Inject]
     public GridLevel(ILoaderService loaderService)
@@ -25,53 +25,50 @@ public class GridLevel : ILevel
         LoadLevel(pathToFile);
     }
 
-    public void FillMap<T>(ref T map)
+    public (Vector3Int[] positions, TileBase[] tiles) FillMap()
     {
-        if (map is Tilemap TileMap)
+        var MapSize = TilesData.MapSize;
+        var mapSizeForArray = MapSize * MapSize;
+        var halfMapSize = MapSize / 2;
+
+        var level = TilesData.Level;
+        TilesData.Tiles = new List<Tile>();
+
+        var tileValidator = new TileValidator();
+
+        int tileIndex = 0;
+        TilesData.Tiles = new List<Tile>();
+        foreach (var levelTile in level)
         {
-            var MapSize = TilesData.MapSize;
-            var mapSizeForArray = MapSize * MapSize;
-            var halfMapSize = MapSize / 2;
-            
-            var level = TilesData.Level;
-            TilesData.Tiles = new List<Tile>();
-            
-            var tileValidator = new TileValidator();
-            
-            int tileIndex = 0;
-            TilesData.Tiles = new List<Tile>();
-            foreach (var levelTile in level)
-            {
-                var tileData = Resources.Load<TileScriptableObject>($"Tiles\\{levelTile}");
+            var tileData = Resources.Load<TileScriptableObject>($"Tiles\\{levelTile}");
 
-                var tile = new Tile{ Cost = tileData.Cost, Representation = tileData.Representation };
-                tileValidator.Validate(tile);
+            var tile = new Tile { Cost = tileData.Cost, Representation = tileData.Representation };
+            tileValidator.Validate(tile);
 
-                TilesData.Tiles.Add(tile);
-                tileIndex++;
-            }
-
-            var positionArray = new Vector3Int[mapSizeForArray];
-            var tileArray = new TileBase[mapSizeForArray];
+            TilesData.Tiles.Add(tile);
             
-            int mapIndex = 0;
-            for (int yPos = halfMapSize; yPos > -halfMapSize; yPos--)
-            {
-                for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
-                {
-                    positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
-                    tileArray[mapIndex] = Resources.Load<TileBase>(level[mapIndex]);
-                    ////TODO: validar aqui los tiles
-                    /// TODO: Aqui tengo que cargar los tiles de acuerdo a los scriptables
-                    mapIndex++;
-                }
-            }
-            
-            TileMap.SetTiles(positionArray, tileArray);
+            tileIndex++;
         }
+
+        var positionArray = new Vector3Int[mapSizeForArray];
+        var tileArray = new TileBase[mapSizeForArray];
+
+        int mapIndex = 0;
+        for (int yPos = halfMapSize; yPos > -halfMapSize; yPos--)
+        {
+            for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
+            {
+                positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
+                tileArray[mapIndex] = Resources.Load<TileBase>(level[mapIndex]);
+                
+                mapIndex++;
+            }
+        }
+
+        return (positionArray, tileArray);
     }
 
     public bool IsLoaded => TilesCount > 0;
 
-    public int TilesCount => TilesData?.TilesCount ?? 0;
+    public int TilesCount => TilesData.TilesCount;
 }

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public interface ILevel
 {
     void LoadLevel(string pathToLevel);
     void LoadLevel(string rootFolder, int level);
-    void FillMap<T>(ref T map);
+    (Vector3Int[] positions, TileBase[] tiles) FillMap();
     bool IsLoaded { get; }
 }
