@@ -32,4 +32,13 @@ public class GridLevelTests : ZenjectUnitTestFixture
 
         Assert.True(level.IsLoaded);
     }
+
+    [Test]
+    [TestCase("TestLevels", 1)]
+    public void LevelIsLoadedByLevelName_Test(string rootPath, int levelToLoad)
+    {
+        level.LoadLevel(rootPath, levelToLoad);
+
+        Assert.True(level.IsLoaded);
+    }
 }

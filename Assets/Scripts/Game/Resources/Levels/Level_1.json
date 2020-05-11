@@ -1,0 +1,328 @@
+{
+  "LevelNumber": 1,
+  "MapSize": 8,
+  "Representations": [
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert",
+    "desert"
+  ],
+  "Tiles": [
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    },
+    {
+      "Cost": 1,
+      "Position": 0
+    },
+    {
+      "Cost": 2,
+      "Position": 1
+    }
+  ]
+}

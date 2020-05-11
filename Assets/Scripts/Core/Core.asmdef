@@ -1,0 +1,17 @@
+{
+    "name": "Core",
+    "references": [
+        "Zenject",
+        "Infrastructure",
+        "Domain",
+        "Game"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

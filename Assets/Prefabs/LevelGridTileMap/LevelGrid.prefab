@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6914657627172508816}
   - component: {fileID: 5525153246060798975}
+  - component: {fileID: 1780410668093893672}
   m_Layer: 0
   m_Name: LevelGrid
   m_TagString: Untagged
@@ -44,6 +45,22 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 1
   m_CellSwizzle: 0
+--- !u!114 &1780410668093893672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318690275814651839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0276de6599a0ae14da52301983f5373d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Tile: {fileID: 11400000, guid: c467190ffcbdf0c4ab367860573b975b, type: 2}
+  MapSize: 8
+  LevelRootFolder: Levels
+  CurrentLevel: 1
 --- !u!1 &6983785201501757370
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,7 +24,24 @@ public class JSonLoaderServiceTests : ZenjectUnitTestFixture
         var levelTileDataFile = _loaderService.Read<LevelTileData>(fileName);
 
         Assert.NotNull(levelTileDataFile);
-        Assert.AreEqual(2, levelTileDataFile.Tiles.Length);
+        Assert.AreEqual(0, levelTileDataFile[0].Position);
+        Assert.AreEqual(1, levelTileDataFile[1].Position);
+        Assert.AreEqual(1, levelTileDataFile[0].Cost);
+        Assert.AreEqual(2, levelTileDataFile[1].Cost);
+    }
+
+    [Test]
+    [TestCase("TestLevels", 1)]
+    public void CanReadJSONFileByLevel_Test(string rootPath, int levelToLoad)
+    {
+        var fileName =  $"{rootPath}\\Level_{levelToLoad}";
+        var levelTileDataFile = _loaderService.Read<LevelTileData>(fileName);
+
+        Assert.NotNull(levelTileDataFile);
+        Assert.AreEqual(1, levelTileDataFile.LevelNumber);
+        Assert.AreEqual(8, levelTileDataFile.MapSize);
+        Assert.AreEqual(levelTileDataFile.MapSize * levelTileDataFile.MapSize, levelTileDataFile.Tiles.Length);
+        Assert.AreEqual(levelTileDataFile.MapSize * levelTileDataFile.MapSize, levelTileDataFile.Representations.Length);
         Assert.AreEqual(0, levelTileDataFile[0].Position);
         Assert.AreEqual(1, levelTileDataFile[1].Position);
         Assert.AreEqual(1, levelTileDataFile[0].Cost);

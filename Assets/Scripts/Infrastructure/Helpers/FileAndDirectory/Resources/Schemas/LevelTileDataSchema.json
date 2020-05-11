@@ -2,6 +2,55 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
+  "LevelNumber": {
+            "$id": "#/properties/LevelNumber",
+            "type": "integer",
+            "title": "The LevelNumber schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+                1.0
+            ]
+        },
+        "Representations": {
+            "$id": "#/properties/Representations",
+            "type": "array",
+            "title": "The Representations schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                [
+                    "desert"
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "anyOf": [
+                    {
+                        "$id": "#/properties/Representations/items/anyOf/0",
+                        "type": "string",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "desert"
+                        ]
+                    }
+                ],
+                "$id": "#/properties/Representations/items"
+            }
+        },
+        "MapSize": {
+            "$id": "#/properties/MapSize",
+            "type": "integer",
+            "title": "The MapSize schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+                8.0
+            ]
+        }
+    },
     "Tiles": {
       "type": "array",
       "items": [
@@ -36,8 +85,7 @@
           ]
         }
       ]
-    }
-  },
+    },
   "required": [
     "Tiles"
   ]
