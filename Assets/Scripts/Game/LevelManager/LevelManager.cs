@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
 
@@ -20,6 +21,13 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        //LevelTileData tiles = new LevelTileData();
+        //tiles.MapSize = 8;
+        //tiles.LevelNumber = 1;
+        //tiles.Level = new List<string>();
+        //tiles.Level.Add("desert");
+        //Debug.Log(JsonUtility.ToJson(tiles));
+
         TileMap = GetComponentInChildren<Tilemap>();
 
         _level.LoadLevel(LevelRootFolder, CurrentLevel);

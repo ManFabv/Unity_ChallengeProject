@@ -1,11 +1,13 @@
 using Zenject;
 using NUnit.Framework;
+using UnityEngine.Tilemaps;
 
 [TestFixture]
 public class GridLevelTests : ZenjectUnitTestFixture
 {
     private GridLevel level;
     private ILoaderService _loaderService;
+    private Tilemap tilemap;
 
     [SetUp]
     public void CommonInstall()
@@ -16,6 +18,7 @@ public class GridLevelTests : ZenjectUnitTestFixture
         Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
         _loaderService = Container.Resolve<ILoaderService>();
         level = new GridLevel(_loaderService);
+        tilemap = null;
     }
 
     [Test]
@@ -25,10 +28,11 @@ public class GridLevelTests : ZenjectUnitTestFixture
     }
 
     [Test]
-    [TestCase("testlevel")]
+    [TestCase("TestLevels\\Level_1")]
     public void LevelIsLoaded_Test(string fileName)
     {
         level.LoadLevel(fileName);
+        level.FillMap<Tilemap>(ref tilemap);
 
         Assert.True(level.IsLoaded);
     }
@@ -38,7 +42,7 @@ public class GridLevelTests : ZenjectUnitTestFixture
     public void LevelIsLoadedByLevelName_Test(string rootPath, int levelToLoad)
     {
         level.LoadLevel(rootPath, levelToLoad);
-
+        level.FillMap<Tilemap>(ref tilemap);
         Assert.True(level.IsLoaded);
     }
 }

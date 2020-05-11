@@ -1,262 +1,70 @@
 {
   "LevelNumber": 1,
   "MapSize": 8,
-  "Tiles": [
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 1,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 2,
-      "Representation": "water"
-    },
-    {
-      "Cost": 1,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 2,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 1,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 2,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "water"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "water"
-    },
-    {
-      "Cost": 1,
-      "Representation": "water"
-    },
-    {
-      "Cost": 2,
-      "Representation": "water"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "desert"
-    },
-    {
-      "Cost": 1,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 2,
-      "Representation": "water"
-    },
-    {
-      "Cost": 1,
-      "Representation": "water"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "water"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 1,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 2,
-      "Representation": "water"
-    },
-    {
-      "Cost": 1,
-      "Representation": "water"
-    },
-    {
-      "Cost": 2,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 1,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 2,
-      "Representation": "mountain"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "forest"
-    },
-    {
-      "Cost": 2,
-      "Representation": "grass"
-    },
-    {
-      "Cost": 1,
-      "Representation": "water"
-    }
+  "Level": [
+    "desert",
+    "desert",
+    "grass",
+    "water",
+    "grass",
+    "mountain",
+    "mountain",
+    "grass",
+    "desert",
+    "desert",
+    "desert",
+    "forest",
+    "grass",
+    "forest",
+    "mountain",
+    "forest",
+    "desert",
+    "forest",
+    "desert",
+    "grass",
+    "grass",
+    "mountain",
+    "desert",
+    "grass",
+    "desert",
+    "forest",
+    "water",
+    "forest",
+    "mountain",
+    "forest",
+    "desert",
+    "desert",
+    "water",
+    "water",
+    "water",
+    "forest",
+    "mountain",
+    "forest",
+    "grass",
+    "desert",
+    "forest",
+    "forest",
+    "desert",
+    "grass",
+    "water",
+    "water",
+    "grass",
+    "water",
+    "grass",
+    "forest",
+    "mountain",
+    "forest",
+    "forest",
+    "grass",
+    "water",
+    "water",
+    "mountain",
+    "mountain",
+    "mountain",
+    "forest",
+    "grass",
+    "forest",
+    "grass",
+    "water"
   ]
 }

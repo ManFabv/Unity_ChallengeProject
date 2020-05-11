@@ -1,4 +1,6 @@
-﻿public interface ILevel
+﻿using System.Collections.Generic;
+
+public interface ILevel
 {
     void LoadLevel(string pathToLevel);
     void LoadLevel(string rootFolder, int level);
