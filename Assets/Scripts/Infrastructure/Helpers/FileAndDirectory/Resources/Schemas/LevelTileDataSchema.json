@@ -12,34 +12,6 @@
                 1.0
             ]
         },
-        "Representations": {
-            "$id": "#/properties/Representations",
-            "type": "array",
-            "title": "The Representations schema",
-            "description": "An explanation about the purpose of this instance.",
-            "default": [],
-            "examples": [
-                [
-                    "desert"
-                ]
-            ],
-            "additionalItems": true,
-            "items": {
-                "anyOf": [
-                    {
-                        "$id": "#/properties/Representations/items/anyOf/0",
-                        "type": "string",
-                        "title": "The first anyOf schema",
-                        "description": "An explanation about the purpose of this instance.",
-                        "default": "",
-                        "examples": [
-                            "desert"
-                        ]
-                    }
-                ],
-                "$id": "#/properties/Representations/items"
-            }
-        },
         "MapSize": {
             "$id": "#/properties/MapSize",
             "type": "integer",
@@ -61,7 +33,7 @@
               "type": "integer"
             },
             "Position": {
-              "type": "integer"
+              "type": "string"
             }
           },
           "required": [
@@ -76,7 +48,7 @@
               "type": "integer"
             },
             "Position": {
-              "type": "integer"
+              "type": "string"
             }
           },
           "required": [

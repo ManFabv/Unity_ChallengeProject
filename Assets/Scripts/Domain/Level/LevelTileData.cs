@@ -3,7 +3,6 @@
 #pragma warning disable 0649
     public Tile[] Tiles;
     public int LevelNumber;
-    public string[] Representations;
     public int MapSize;
 #pragma warning restore 0649
 

@@ -31,7 +31,6 @@ public class GridLevel : ILevel
             var MapSize = TilesData.MapSize;
             int mapSizeForArray = MapSize * MapSize;
             int halfMapSize = MapSize / 2;
-            var representations = TilesData.Representations;
             var tiles = TilesData.Tiles;
 
             var positionArray = new Vector3Int[mapSizeForArray];
@@ -43,8 +42,9 @@ public class GridLevel : ILevel
                 for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
                 {
                     positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
-                    tileArray[mapIndex] = Resources.Load<TileBase>(representations[mapIndex]);
+                    tileArray[mapIndex] = Resources.Load<TileBase>(tiles[mapIndex].Representation);
                     mapIndex++;
+                    //TODO: validar aqui los tiles
                 }
             }
             

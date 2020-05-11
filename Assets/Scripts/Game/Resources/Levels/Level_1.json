@@ -1,328 +1,262 @@
 {
   "LevelNumber": 1,
   "MapSize": 8,
-  "Representations": [
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert",
-    "desert"
-  ],
   "Tiles": [
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "desert"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "grass"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "water"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "grass"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "mountain"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "mountain"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "desert"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "grass"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "mountain"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "grass"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "mountain"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "water"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "mountain"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
-    },
-    {
-      "Cost": 2,
-      "Position": 1
+      "Representation": "desert"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "water"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "water"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "water"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "mountain"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "desert"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "desert"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "grass"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "water"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "water"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "water"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "mountain"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "forest"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "grass"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "water"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "water"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "mountain"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "mountain"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "mountain"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
     },
     {
       "Cost": 1,
-      "Position": 0
+      "Representation": "forest"
     },
     {
       "Cost": 2,
-      "Position": 1
+      "Representation": "grass"
+    },
+    {
+      "Cost": 1,
+      "Representation": "water"
     }
   ]
 }
