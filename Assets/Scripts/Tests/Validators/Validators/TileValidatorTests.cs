@@ -17,20 +17,20 @@ public class TileValidatorTests : ZenjectUnitTestFixture
     {
         var tileWithNegativeCost = new Tile()
         {
-            Cost = -1,
-            Position = 0
+            Cost = -2,
+            Representation = "desert"
         };
         var validationResults = tileValidator.Validate(tileWithNegativeCost);
         Assert.AreEqual(1, validationResults.Errors.Count);
     }
 
     [Test]
-    public void TileIsInvalidPosition_Test()
+    public void TileIsInvalidRepresentation_Test()
     {
         var tileWithNegativePosition = new Tile()
         {
-            Cost = 0,
-            Position = -1
+            Cost = -1,
+            Representation = string.Empty
         };
         var validationResults = tileValidator.Validate(tileWithNegativePosition);
         Assert.AreEqual(1, validationResults.Errors.Count);
@@ -39,8 +39,10 @@ public class TileValidatorTests : ZenjectUnitTestFixture
     [Test]
     public void TileIsEmptyCostAndPosition_Test()
     {
-        var tileWithNegativePosition = new Tile();
-        var validationResults = tileValidator.Validate(tileWithNegativePosition);
-        Assert.AreEqual(0, validationResults.Errors.Count);
+        var tileInvalid = new Tile();
+        tileInvalid.Representation = string.Empty;
+        tileInvalid.Cost = -2;
+        var validationResults = tileValidator.Validate(tileInvalid);
+        Assert.AreEqual(2, validationResults.Errors.Count);
     }
 }

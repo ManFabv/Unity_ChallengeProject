@@ -5,7 +5,8 @@
         "Zenject",
         "Game",
         "Domain",
-        "Infrastructure"
+        "Infrastructure",
+        "Core"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

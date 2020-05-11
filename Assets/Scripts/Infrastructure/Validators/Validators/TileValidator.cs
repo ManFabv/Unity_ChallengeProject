@@ -7,16 +7,16 @@ public class TileValidator : AbstractValidator<Tile>
         RuleFor(t => t.Cost)
             .Cascade(CascadeMode.StopOnFirstFailure)
             .NotNull().WithMessage("{PropertyName} shouldn't be null")
-            .Must(BeAPositiveIntValue).WithMessage("{PropertyName} is not a valid value");
+            .Must(BeAnIntValueInRange).WithMessage("{PropertyName} is not a valid value");
 
-        RuleFor(t => t.Position)
+        RuleFor(t => t.Representation)
             .Cascade(CascadeMode.StopOnFirstFailure)
             .NotNull().WithMessage("{PropertyName} shouldn't be null")
-            .Must(BeAPositiveIntValue).WithMessage("{PropertyName} is not a valid value");
+            .NotEmpty().WithMessage("{PropertyName} shouldn't be null");
     }
 
-    private bool BeAPositiveIntValue(int intValue)
+    private bool BeAnIntValueInRange(int intValue)
     {
-        return intValue >= 0;
+        return intValue >= -1;
     }
 }

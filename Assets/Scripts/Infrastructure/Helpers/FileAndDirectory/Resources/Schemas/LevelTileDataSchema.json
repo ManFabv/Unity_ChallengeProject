@@ -1,44 +1,73 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "type": "object",
-  "properties": {
-    "Tiles": {
-      "type": "array",
-      "items": [
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
         {
-          "type": "object",
-          "properties": {
-            "Cost": {
-              "type": "integer"
-            },
-            "Position": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "Cost",
-            "Position"
-          ]
-        },
-        {
-          "type": "object",
-          "properties": {
-            "Cost": {
-              "type": "integer"
-            },
-            "Position": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "Cost",
-            "Position"
-          ]
+            "Level": [
+                "desert"
+            ],
+            "LevelNumber": 1.0,
+            "MapSize": 8.0
         }
-      ]
+    ],
+    "required": [
+        "Level",
+        "LevelNumber",
+        "MapSize"
+    ],
+    "additionalProperties": true,
+    "properties": {
+        "Level": {
+            "$id": "#/properties/Level",
+            "type": "array",
+            "title": "The Level schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "examples": [
+                [
+                    "desert"
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "anyOf": [
+                    {
+                        "$id": "#/properties/Level/items/anyOf/0",
+                        "type": "string",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "desert"
+                        ]
+                    }
+                ],
+                "$id": "#/properties/Level/items"
+            }
+        },
+        "LevelNumber": {
+            "$id": "#/properties/LevelNumber",
+            "type": "integer",
+            "title": "The LevelNumber schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+                1.0
+            ]
+        },
+        "MapSize": {
+            "$id": "#/properties/MapSize",
+            "type": "integer",
+            "title": "The MapSize schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": 0.0,
+            "examples": [
+                8.0
+            ]
+        }
     }
-  },
-  "required": [
-    "Tiles"
-  ]
 }
