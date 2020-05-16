@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     private Tilemap TileMap;
 
-    [SerializeField] private string LevelRootFolder = "Levels";
+    private IGameStaticsLevelValues _gameStaticsLevelValues;
 
     [SerializeField] private int CurrentLevel = 1;
 
@@ -17,9 +17,10 @@ public class LevelManager : MonoBehaviour
     private Grid GridTileMap;
 
     [Inject] 
-    void Construct(ILevel level)
+    void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues)
     {
         _level = level;
+        _gameStaticsLevelValues = gameStaticsLevelValues;
     }
 
     void Awake()
@@ -31,7 +32,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        _level.LoadLevel(LevelRootFolder, CurrentLevel);
+        _level.LoadLevel(_gameStaticsLevelValues.LevelRootFolder, CurrentLevel);
         
         var map = _level.GetFilledMap();
 

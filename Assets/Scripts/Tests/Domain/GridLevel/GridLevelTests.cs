@@ -7,18 +7,22 @@ public class GridLevelTests : ZenjectUnitTestFixture
     private GridLevel level;
     private ILoaderService _loaderService;
     private IReader _reader;
+    private IGameStaticsLevelValues _gameStaticsLevelValues;
 
     [SetUp]
     public void CommonInstall()
     {
+        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
         Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
         Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
         Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
         Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
+
+        _gameStaticsLevelValues = Container.Resolve<IGameStaticsLevelValues>();
         _loaderService = Container.Resolve<ILoaderService>();
         _reader = Container.Resolve<IReader>();
 
-        level = new GridLevel(_loaderService, _reader);
+        level = new GridLevel(_loaderService, _reader, _gameStaticsLevelValues);
     }
 
     [Test]
@@ -64,7 +68,7 @@ public class GridLevelTests : ZenjectUnitTestFixture
     [TestCase("TestLevels", 1)]
     public void CanReadJSONFileByLevel_Test(string rootPath, int levelToLoad)
     {
-        var fileName = $"{rootPath}\\Level_{levelToLoad}";
+        var fileName = $"{rootPath}\\{_gameStaticsLevelValues.LevelRootName}{levelToLoad}";
         var levelTileDataFile = _loaderService.Read<LevelTileData>(fileName);
 
         Assert.NotNull(levelTileDataFile);

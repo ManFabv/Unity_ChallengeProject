@@ -10,6 +10,7 @@ public class ReaderTests : ZenjectUnitTestFixture
     [SetUp]
     public void CommonInstall()
     {
+        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
         Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
         _reader = Container.Resolve<IReader>();
     }

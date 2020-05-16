@@ -1,8 +1,17 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 public class UnityResourcesReader : IReader
 {
+    private readonly IGameStaticsLevelValues _gameStaticsLevelValues;
+
+    [Inject]
+    public UnityResourcesReader(IGameStaticsLevelValues gameStaticsLevelValues)
+    {
+        _gameStaticsLevelValues = gameStaticsLevelValues;
+    }
+
     public T Read<T>(string fileName) where T : UnityEngine.Object
     {
         try
@@ -29,7 +38,7 @@ public class UnityResourcesReader : IReader
 
     public string ReadSchema(Type typeOfSchema)
     {
-        var fileName = $"Schemas\\{typeOfSchema}Schema";
+        var fileName = $"{_gameStaticsLevelValues.LevelSchemaRootFolder}\\{typeOfSchema}{_gameStaticsLevelValues.LevelSchemaRootName}";
 
         return Read(fileName);
     }

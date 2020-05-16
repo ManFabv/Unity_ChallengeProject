@@ -6,15 +6,18 @@ using NUnit.Framework;
 public class JSonLoaderServiceTests : ZenjectUnitTestFixture
 {
     private ILoaderService _loaderService;
+    private IGameStaticsLevelValues _gameStaticsLevelValues;
 
     [SetUp]
     public void CommonInstall()
     {
+        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
         Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
         Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
         Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
         Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
         _loaderService = Container.Resolve<ILoaderService>();
+        _gameStaticsLevelValues = Container.Resolve<IGameStaticsLevelValues>();
     }
 
     [Test]
@@ -30,7 +33,7 @@ public class JSonLoaderServiceTests : ZenjectUnitTestFixture
     [TestCase("TestLevels", 1)]
     public void CanReadJSONFileByLevel_Test(string rootPath, int levelToLoad)
     {
-        var fileName =  $"{rootPath}\\Level_{levelToLoad}";
+        var fileName =  $"{rootPath}\\{_gameStaticsLevelValues.LevelRootName}{levelToLoad}";
         var levelTileDataFile = _loaderService.Read<LevelTileData>(fileName);
 
         Assert.NotNull(levelTileDataFile);

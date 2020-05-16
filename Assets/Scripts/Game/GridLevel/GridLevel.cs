@@ -7,13 +7,15 @@ public class GridLevel : ILevel
 {
     private readonly ILoaderService _loaderService;
     private readonly IReader _reader;
+    private readonly IGameStaticsLevelValues _gameStaticsLevelValues;
     private LevelTileData TilesData = new LevelTileData();
 
     [Inject]
-    public GridLevel(ILoaderService loaderService, IReader reader)
+    public GridLevel(ILoaderService loaderService, IReader reader, IGameStaticsLevelValues gameStaticsLevelValues)
     {
         _loaderService = loaderService;
         _reader = reader;
+        _gameStaticsLevelValues = gameStaticsLevelValues;
     }
 
     public void LoadLevel(string pathToLevel)
@@ -23,7 +25,7 @@ public class GridLevel : ILevel
 
     public void LoadLevel(string rootFolder, int level)
     {
-        var pathToFile = $"{rootFolder}\\Level_{level}";
+        var pathToFile = $"{rootFolder}\\{_gameStaticsLevelValues.LevelRootName}{level}";
         LoadLevel(pathToFile);
     }
 
@@ -58,7 +60,7 @@ public class GridLevel : ILevel
 
     private void InitializeTile(List<string> level, int mapIndex, TileValidator tileValidator)
     {
-        var tileData = _reader.Read<TileScriptableObject>($"Tiles\\{level[mapIndex]}");
+        var tileData = _reader.Read<TileScriptableObject>($"{_gameStaticsLevelValues.LevelRootTilesFolder}\\{level[mapIndex]}");
 
         var tile = new Tile {Cost = tileData.Cost, Representation = tileData.Representation};
         tileValidator.Validate(tile);

@@ -10,6 +10,7 @@ public class JsonSchemaBuilderTests : ZenjectUnitTestFixture
     [SetUp]
     public void CommonInstall()
     {
+        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
         Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
         Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
         _schemaBuilder = Container.Resolve<ISchemaBuilder>();
