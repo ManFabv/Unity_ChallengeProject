@@ -16,10 +16,13 @@ public class JSonLoaderService : ILoaderService
 
     public T Read<T>(string fileName)
     {
+        var json = _reader.Read(fileName);
+
+        if (!_schemaValidator.ValidateAsSchemaType<T>(json))
+            throw new ArgumentException($"File {fileName} doesn't comply with schema for type {typeof(T)}");
+
         try
         {
-            var json = _reader.Read(fileName);
-            _schemaValidator.ValidateAsSchemaType<T>(json);
             var result = JsonConvert.DeserializeObject<T>(json);
             return result;
         }

@@ -5,6 +5,6 @@ public interface ILevel
 {
     void LoadLevel(string pathToLevel);
     void LoadLevel(string rootFolder, int level);
-    (Vector3Int[] positions, TileBase[] tiles) FillMap();
+    (Vector3Int[] positions, TileBase[] tiles) GetFilledMap();
     bool IsLoaded { get; }
 }

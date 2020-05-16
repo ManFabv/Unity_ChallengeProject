@@ -15,12 +15,14 @@ public class JsonSchemaValidator : ISchemaValidator
 
     public bool ValidateAsSchemaType<T>(string sourceObjectInfo)
     {
+        var schema = _schemaBuilder.Build(typeof(T));
+
         try
         {
-            var schema = _schemaBuilder.Build(typeof(T));
             var targetJObject = JObject.Parse(sourceObjectInfo);
             return targetJObject.IsValid(schema);
         }
+
         catch (Newtonsoft.Json.JsonReaderException)
         {
             throw new ArgumentException($"Error trying to validate schema for type: {typeof(T)}, against object: {sourceObjectInfo}");

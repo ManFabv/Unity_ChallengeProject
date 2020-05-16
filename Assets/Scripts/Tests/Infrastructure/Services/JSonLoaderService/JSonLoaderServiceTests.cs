@@ -37,6 +37,13 @@ public class JSonLoaderServiceTests : ZenjectUnitTestFixture
         Assert.AreEqual(1, levelTileDataFile.LevelNumber);
         Assert.AreEqual(8, levelTileDataFile.MapSize);
     }
+    
+    [Test]
+    [TestCase("testlevelinvalid")]
+    public void CannotReadJSONFileBecauseDoesntComplySchema_Test(string fileName)
+    {
+        Assert.Throws<ArgumentException>(() => _loaderService.Read<LevelTileData>(fileName));
+    }
 
     [Test]
     [TestCase("testlevel")]

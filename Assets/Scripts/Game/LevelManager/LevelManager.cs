@@ -2,6 +2,7 @@
 using UnityEngine.Tilemaps;
 using Zenject;
 
+[RequireComponent(typeof(Grid))]
 public class LevelManager : MonoBehaviour 
 {
     private Tilemap TileMap;
@@ -12,20 +13,39 @@ public class LevelManager : MonoBehaviour
 
     private ILevel _level;
 
+    private Camera MainCamera;
+    private Grid GridTileMap;
+
     [Inject] 
     void Construct(ILevel level)
     {
         _level = level;
     }
 
+    void Awake()
+    {
+        MainCamera = Camera.main;
+        TileMap = GetComponentInChildren<Tilemap>();
+        GridTileMap = GetComponent<Grid>();
+    }
+
     void Start()
     {
-        TileMap = GetComponentInChildren<Tilemap>();
-
         _level.LoadLevel(LevelRootFolder, CurrentLevel);
         
-        var map = _level.FillMap();
+        var map = _level.GetFilledMap();
 
         TileMap.SetTiles(map.positions, map.tiles);
+    }
+
+    //TODO: only for testing purposes. Remove
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
+            var selectedTile = TileMap.GetTile(coordinate);
+        }
     }
 }

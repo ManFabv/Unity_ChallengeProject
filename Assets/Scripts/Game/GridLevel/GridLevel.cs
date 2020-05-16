@@ -6,12 +6,14 @@ using Zenject;
 public class GridLevel : ILevel 
 {
     private readonly ILoaderService _loaderService;
+    private readonly IReader _reader;
     private LevelTileData TilesData = new LevelTileData();
 
     [Inject]
-    public GridLevel(ILoaderService loaderService)
+    public GridLevel(ILoaderService loaderService, IReader reader)
     {
         _loaderService = loaderService;
+        _reader = reader;
     }
 
     public void LoadLevel(string pathToLevel)
@@ -25,7 +27,7 @@ public class GridLevel : ILevel
         LoadLevel(pathToFile);
     }
 
-    public (Vector3Int[] positions, TileBase[] tiles) FillMap()
+    public (Vector3Int[] positions, TileBase[] tiles) GetFilledMap()
     {
         var MapSize = TilesData.MapSize;
         var mapSizeForArray = MapSize * MapSize;
@@ -36,36 +38,38 @@ public class GridLevel : ILevel
 
         var tileValidator = new TileValidator();
 
-        int tileIndex = 0;
-        TilesData.Tiles = new List<Tile>();
-        foreach (var levelTile in level)
-        {
-            var tileData = Resources.Load<TileScriptableObject>($"Tiles\\{levelTile}");
-
-            var tile = new Tile { Cost = tileData.Cost, Representation = tileData.Representation };
-            tileValidator.Validate(tile);
-
-            TilesData.Tiles.Add(tile);
-            
-            tileIndex++;
-        }
-
         var positionArray = new Vector3Int[mapSizeForArray];
         var tileArray = new TileBase[mapSizeForArray];
-
+        TilesData.Tiles = new List<Tile>();
+        
         int mapIndex = 0;
         for (int yPos = halfMapSize; yPos > -halfMapSize; yPos--)
         {
             for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
             {
-                positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
-                tileArray[mapIndex] = Resources.Load<TileBase>(level[mapIndex]);
-                
+                InitializeTileMapTile(positionArray, mapIndex, xPos, yPos, tileArray, level);
+                InitializeTile(level, mapIndex, tileValidator);
                 mapIndex++;
             }
         }
 
         return (positionArray, tileArray);
+    }
+
+    private void InitializeTile(List<string> level, int mapIndex, TileValidator tileValidator)
+    {
+        var tileData = _reader.Read<TileScriptableObject>($"Tiles\\{level[mapIndex]}");
+
+        var tile = new Tile {Cost = tileData.Cost, Representation = tileData.Representation};
+        tileValidator.Validate(tile);
+
+        TilesData.Tiles.Add(tile);
+    }
+
+    private void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, TileBase[] tileArray, List<string> level)
+    {
+        positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
+        tileArray[mapIndex] = _reader.Read<TileBase>(level[mapIndex]);
     }
 
     public bool IsLoaded => TilesCount > 0;
