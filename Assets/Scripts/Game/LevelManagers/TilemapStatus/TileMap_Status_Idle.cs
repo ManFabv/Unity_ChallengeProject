@@ -12,7 +12,6 @@ namespace PPop.Game.LevelManagers
         public void Execute(T node)
         {
             Debug.Log("Esperando click");
-            //throw new System.NotImplementedException();
         }
 
         public void Exit(T node) {}

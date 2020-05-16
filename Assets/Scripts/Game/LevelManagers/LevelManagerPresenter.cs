@@ -24,6 +24,7 @@ namespace PPop.Game.LevelManagers
 
         private TileNode _startTileNode;
         private TileNode _destinationTileNode;
+        private TileNode _selectedTileNode;
         private ILevelStateManager<TileNode> _levelStateManager;
 
         [Inject] 
@@ -32,6 +33,7 @@ namespace PPop.Game.LevelManagers
             _level = level;
             _gameStaticsLevelValues = gameStaticsLevelValues;
             _levelStateManager = levelStateManager;
+            _selectedTileNode = ScriptableObject.CreateInstance<TileNode>();
         }
 
         void Awake()
@@ -51,20 +53,19 @@ namespace PPop.Game.LevelManagers
             TileMap.ClearAllTileMapFlags(map.positions);
         }
 
-        //TODO: only for testing purposes. Remove
         void Update()
         {
-            _levelStateManager.Execute(null); //TODO: what is the parameter?
-
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
 
-                var tileNode = TileMap.GetTile<TileBase>(coordinate);
+                _selectedTileNode = TileMap.GetTile<TileNode>(coordinate);
 
                 TileMap.SetColor(coordinate, Color.red);
             }
+
+            _levelStateManager.Execute(_selectedTileNode);
         }
     }
 }

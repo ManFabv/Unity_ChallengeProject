@@ -25,7 +25,10 @@ namespace PPop.Game.GridLevels
         {
             var tileData = _reader.Read<TileScriptableObject>($"{_gameStaticsLevelValues.LevelRootTilesFolder}\\{level[mapIndex]}");
 
-            var tile = new TileNode { Cost = tileData.Cost, Representation = tileData.Representation, Position = positionTile };
+            var tile = ScriptableObject.CreateInstance<TileNode>();
+            tile.Cost = tileData.Cost;
+            tile.Representation = tileData.Representation;
+            tile.Position = positionTile;
             tileValidator.Validate(tile);
 
             Tiles.Add(tile);

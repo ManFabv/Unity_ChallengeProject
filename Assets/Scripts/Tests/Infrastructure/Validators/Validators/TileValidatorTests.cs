@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using PPop.Domain.Tiles;
 using PPop.Infrastructure.Validators.Validators;
+using UnityEngine;
 using Zenject;
 
 namespace PPop.Tests.Infrastructure.Validators.Validators
@@ -19,11 +20,10 @@ namespace PPop.Tests.Infrastructure.Validators.Validators
         [Test]
         public void TileIsInvalidCost_Test()
         {
-            var tileWithNegativeCost = new TileNode()
-            {
-                Cost = -2,
-                Representation = "desert"
-            };
+            var tileWithNegativeCost = ScriptableObject.CreateInstance<TileNode>();
+            tileWithNegativeCost.Cost = -2;
+            tileWithNegativeCost.Representation = "desert";
+            tileWithNegativeCost.Position = Vector3Int.zero;
             var validationResults = tileValidator.Validate(tileWithNegativeCost);
             Assert.AreEqual(1, validationResults.Errors.Count);
         }
@@ -31,19 +31,17 @@ namespace PPop.Tests.Infrastructure.Validators.Validators
         [Test]
         public void TileIsInvalidRepresentation_Test()
         {
-            var tileWithNegativePosition = new TileNode()
-            {
-                Cost = -1,
-                Representation = string.Empty
-            };
-            var validationResults = tileValidator.Validate(tileWithNegativePosition);
+            var tileWithoutPosition = ScriptableObject.CreateInstance<TileNode>();
+            tileWithoutPosition.Cost = -1;
+            tileWithoutPosition.Representation = string.Empty;
+            var validationResults = tileValidator.Validate(tileWithoutPosition);
             Assert.AreEqual(1, validationResults.Errors.Count);
         }
 
         [Test]
         public void TileIsEmptyCostAndPosition_Test()
         {
-            var tileInvalid = new TileNode();
+            var tileInvalid = ScriptableObject.CreateInstance<TileNode>();
             tileInvalid.Representation = string.Empty;
             tileInvalid.Cost = -2;
             var validationResults = tileValidator.Validate(tileInvalid);

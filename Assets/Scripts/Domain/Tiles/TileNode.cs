@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using PathFinding;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace PPop.Domain.Tiles
 {
-    public class TileNode : IAStarNode 
+    public class TileNode : TileBase, IAStarNode 
     {
         public int Cost;
         public string Representation;
