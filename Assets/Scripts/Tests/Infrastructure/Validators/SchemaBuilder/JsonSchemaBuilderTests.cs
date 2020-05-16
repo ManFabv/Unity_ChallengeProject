@@ -2,25 +2,28 @@
 using NUnit.Framework;
 using Zenject;
 
-[TestFixture]
-public class JsonSchemaBuilderTests : ZenjectUnitTestFixture
+namespace Assets.Scripts.Tests.Infrastructure.Validators.SchemaBuilder
 {
-    private ISchemaBuilder _schemaBuilder;
-
-    [SetUp]
-    public void CommonInstall()
+    [TestFixture]
+    public class JsonSchemaBuilderTests : ZenjectUnitTestFixture
     {
-        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
-        Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
-        Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
-        _schemaBuilder = Container.Resolve<ISchemaBuilder>();
-    }
+        private ISchemaBuilder _schemaBuilder;
 
-    [Test]
-    [TestCase(typeof(LevelTileData))]
-    public void CanBuildSchema_Test(Type objecType)
-    {
-        var schema = _schemaBuilder.Build(objecType);
-        Assert.NotNull(schema);
+        [SetUp]
+        public void CommonInstall()
+        {
+            Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
+            Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
+            Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
+            _schemaBuilder = Container.Resolve<ISchemaBuilder>();
+        }
+
+        [Test]
+        [TestCase(typeof(LevelTileData))]
+        public void CanBuildSchema_Test(Type objecType)
+        {
+            var schema = _schemaBuilder.Build(objecType);
+            Assert.NotNull(schema);
+        }
     }
 }

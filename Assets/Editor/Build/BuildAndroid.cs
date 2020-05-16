@@ -4,16 +4,17 @@ using UnityEngine;
 
 namespace Assets.Editor.Build
 {
-    public class BuildiOS : MonoBehaviour
+    public class BuildAndroid : MonoBehaviour 
     {
-        [MenuItem("Build/Build iOS")]
-        public static void ExportXcodeProject()
+        [MenuItem("Build/Build Android")]
+        public static void ExportAndroidStudioProject()
         {
-            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS);
+            EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
 
             EditorUserBuildSettings.symlinkLibraries = true;
             EditorUserBuildSettings.development = false;
             EditorUserBuildSettings.allowDebugging = false;
+            EditorUserBuildSettings.exportAsGoogleAndroidProject = true;
 
             List<string> scenes = new List<string>();
             for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)
@@ -24,7 +25,7 @@ namespace Assets.Editor.Build
                 }
             }
 
-            BuildPipeline.BuildPlayer(scenes.ToArray(), "Build\\iOS\\PPOP_ChallengeProject", BuildTarget.iOS, BuildOptions.None);
+            BuildPipeline.BuildPlayer(scenes.ToArray(), "Build\\Android\\PPOP_ChallengeProject", BuildTarget.Android, BuildOptions.None);
         }
     }
 }

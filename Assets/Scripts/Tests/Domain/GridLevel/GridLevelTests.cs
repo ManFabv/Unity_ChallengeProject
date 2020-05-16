@@ -1,78 +1,81 @@
-using Zenject;
 using NUnit.Framework;
+using Zenject;
 
-[TestFixture]
-public class GridLevelTests : ZenjectUnitTestFixture
+namespace Assets.Scripts.Tests.Domain.GridLevel
 {
-    private GridLevel level;
-    private ILoaderService _loaderService;
-    private IReader _reader;
-    private IGameStaticsLevelValues _gameStaticsLevelValues;
-
-    [SetUp]
-    public void CommonInstall()
+    [TestFixture]
+    public class GridLevelTests : ZenjectUnitTestFixture
     {
-        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
-        Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
-        Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
-        Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
-        Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
+        private global::GridLevel level;
+        private ILoaderService _loaderService;
+        private IReader _reader;
+        private IGameStaticsLevelValues _gameStaticsLevelValues;
 
-        _gameStaticsLevelValues = Container.Resolve<IGameStaticsLevelValues>();
-        _loaderService = Container.Resolve<ILoaderService>();
-        _reader = Container.Resolve<IReader>();
+        [SetUp]
+        public void CommonInstall()
+        {
+            Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
+            Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
+            Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
+            Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
+            Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
 
-        level = new GridLevel(_loaderService, _reader, _gameStaticsLevelValues);
-    }
+            _gameStaticsLevelValues = Container.Resolve<IGameStaticsLevelValues>();
+            _loaderService = Container.Resolve<ILoaderService>();
+            _reader = Container.Resolve<IReader>();
 
-    [Test]
-    public void LevelIsNotLoaded_Test()
-    {
-        Assert.True(!level.IsLoaded);
-    }
+            level = new global::GridLevel(_loaderService, _reader, _gameStaticsLevelValues);
+        }
 
-    [Test]
-    [TestCase("TestLevels\\Level_1")]
-    public void LevelIsLoaded_Test(string fileName)
-    {
-        level.LoadLevel(fileName);
-        Assert.DoesNotThrow(() => level.GetFilledMap());
-        Assert.True(level.IsLoaded);
-    }
+        [Test]
+        public void LevelIsNotLoaded_Test()
+        {
+            Assert.True(!level.IsLoaded);
+        }
 
-    [Test]
-    [TestCase("TestLevels", 1)]
-    public void LevelIsNotLoadedByLevelName_Test(string rootPath, int levelToLoad)
-    {
-        level.LoadLevel(rootPath, levelToLoad);
-        Assert.DoesNotThrow(() => level.GetFilledMap());
-        Assert.True(level.IsLoaded);
-    }
+        [Test]
+        [TestCase("TestLevels\\Level_1")]
+        public void LevelIsLoaded_Test(string fileName)
+        {
+            level.LoadLevel(fileName);
+            Assert.DoesNotThrow(() => level.GetFilledMap());
+            Assert.True(level.IsLoaded);
+        }
 
-    [Test]
-    [TestCase("TestLevels\\Level_1")]
-    public void LevelIsLoadedNotFails_Test(string fileName)
-    {
-        level.LoadLevel(fileName);
-        var map = level.GetFilledMap();
+        [Test]
+        [TestCase("TestLevels", 1)]
+        public void LevelIsNotLoadedByLevelName_Test(string rootPath, int levelToLoad)
+        {
+            level.LoadLevel(rootPath, levelToLoad);
+            Assert.DoesNotThrow(() => level.GetFilledMap());
+            Assert.True(level.IsLoaded);
+        }
 
-        Assert.NotNull(map);
-        Assert.NotNull(map.positions);
-        Assert.NotNull(map.tiles);
-        Assert.AreEqual(64, map.tiles.Length);
-        Assert.AreEqual(64, map.positions.Length);
-        Assert.True(level.IsLoaded);
-    }
+        [Test]
+        [TestCase("TestLevels\\Level_1")]
+        public void LevelIsLoadedNotFails_Test(string fileName)
+        {
+            level.LoadLevel(fileName);
+            var map = level.GetFilledMap();
 
-    [Test]
-    [TestCase("TestLevels", 1)]
-    public void CanReadJSONFileByLevel_Test(string rootPath, int levelToLoad)
-    {
-        var fileName = $"{rootPath}\\{_gameStaticsLevelValues.LevelRootName}{levelToLoad}";
-        var levelTileDataFile = _loaderService.Read<LevelTileData>(fileName);
+            Assert.NotNull(map);
+            Assert.NotNull(map.positions);
+            Assert.NotNull(map.tiles);
+            Assert.AreEqual(64, map.tiles.Length);
+            Assert.AreEqual(64, map.positions.Length);
+            Assert.True(level.IsLoaded);
+        }
 
-        Assert.NotNull(levelTileDataFile);
-        Assert.AreEqual(1, levelTileDataFile.LevelNumber);
-        Assert.AreEqual(8, levelTileDataFile.MapSize);
+        [Test]
+        [TestCase("TestLevels", 1)]
+        public void CanReadJSONFileByLevel_Test(string rootPath, int levelToLoad)
+        {
+            var fileName = $"{rootPath}\\{_gameStaticsLevelValues.LevelRootName}{levelToLoad}";
+            var levelTileDataFile = _loaderService.Read<LevelTileData>(fileName);
+
+            Assert.NotNull(levelTileDataFile);
+            Assert.AreEqual(1, levelTileDataFile.LevelNumber);
+            Assert.AreEqual(8, levelTileDataFile.MapSize);
+        }
     }
 }

@@ -1,66 +1,69 @@
 using System;
-using Zenject;
 using NUnit.Framework;
+using Zenject;
 
-[TestFixture]
-public class ReaderTests : ZenjectUnitTestFixture
+namespace Assets.Scripts.Tests.Infrastructure.Helpers.Readers
 {
-    private IReader _reader;
-
-    [SetUp]
-    public void CommonInstall()
+    [TestFixture]
+    public class ReaderTests : ZenjectUnitTestFixture
     {
-        Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
-        Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
-        _reader = Container.Resolve<IReader>();
-    }
+        private IReader _reader;
 
-    [Test]
-    [TestCase("testlevel")]
-    public void CanLoadFile_Test(string fileName)
-    {
-        Assert.DoesNotThrow(() => _reader.Read(fileName));
-    }
+        [SetUp]
+        public void CommonInstall()
+        {
+            Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
+            Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
+            _reader = Container.Resolve<IReader>();
+        }
 
-    [Test]
-    [TestCase("testlevel")]
-    public void CanReadFile_Test(string fileName)
-    {
-        var fileContent = _reader.Read(fileName);
-        Assert.AreNotEqual(string.Empty, fileContent);
-    }
+        [Test]
+        [TestCase("testlevel")]
+        public void CanLoadFile_Test(string fileName)
+        {
+            Assert.DoesNotThrow(() => _reader.Read(fileName));
+        }
 
-    [Test]
-    [TestCase("testlevelasd")]
-    public void FileNotFound_Test(string fileName)
-    {
-        Assert.Throws<ArgumentException>(() => _reader.Read(fileName));
-    }
+        [Test]
+        [TestCase("testlevel")]
+        public void CanReadFile_Test(string fileName)
+        {
+            var fileContent = _reader.Read(fileName);
+            Assert.AreNotEqual(string.Empty, fileContent);
+        }
 
-    [Test]
-    [TestCase(typeof(LevelTileData))]
-    public void CanLoadSchemaFile_Test(Type asType)
-    {
-        Assert.DoesNotThrow(() => _reader.ReadSchema(asType));
-    }
+        [Test]
+        [TestCase("testlevelasd")]
+        public void FileNotFound_Test(string fileName)
+        {
+            Assert.Throws<ArgumentException>(() => _reader.Read(fileName));
+        }
 
-    [Test]
-    [TestCase(typeof(LevelTileData))]
-    public void CanReadSchemaFile_Test(Type asType)
-    {
-        var fileContent = _reader.ReadSchema(asType);
-        Assert.AreNotEqual(string.Empty, fileContent);
-    }
+        [Test]
+        [TestCase(typeof(LevelTileData))]
+        public void CanLoadSchemaFile_Test(Type asType)
+        {
+            Assert.DoesNotThrow(() => _reader.ReadSchema(asType));
+        }
 
-    [Test]
-    [TestCase(typeof(LevelTileDataMock))]
-    public void SchemaFileNotFound_Test(Type asType)
-    {
-        Assert.Throws<ArgumentException>(() => _reader.ReadSchema(asType));
-    }
+        [Test]
+        [TestCase(typeof(LevelTileData))]
+        public void CanReadSchemaFile_Test(Type asType)
+        {
+            var fileContent = _reader.ReadSchema(asType);
+            Assert.AreNotEqual(string.Empty, fileContent);
+        }
 
-    private class LevelTileDataMock
-    {
-        private int value;
+        [Test]
+        [TestCase(typeof(LevelTileDataMock))]
+        public void SchemaFileNotFound_Test(Type asType)
+        {
+            Assert.Throws<ArgumentException>(() => _reader.ReadSchema(asType));
+        }
+
+        private class LevelTileDataMock
+        {
+            private int value;
+        }
     }
 }
