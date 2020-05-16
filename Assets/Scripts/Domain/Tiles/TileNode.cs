@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using PathFinding;
+using UnityEngine;
 
 namespace PPop.Domain.Tiles
 {
@@ -7,6 +8,7 @@ namespace PPop.Domain.Tiles
     {
         public int Cost;
         public string Representation;
+        public Vector3Int Position;
 
         public IEnumerable<IAStarNode> Neighbours => throw new System.NotImplementedException();
 

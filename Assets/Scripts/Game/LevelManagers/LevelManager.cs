@@ -1,4 +1,5 @@
 ﻿using PPop.Domain.Levels;
+using PPop.Domain.Tiles;
 using PPop.Infrastructure.Helpers.Tilemaps;
 using PPops.Domain.Statics.LevelStatics;
 using UnityEngine;
@@ -20,6 +21,9 @@ namespace PPop.Game.LevelManagers
 
         private Camera MainCamera;
         private Grid GridTileMap;
+
+        private TileNode _startTileNode;
+        private TileNode _destinationTileNode;
 
         [Inject] 
         void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues)
@@ -52,6 +56,11 @@ namespace PPop.Game.LevelManagers
             {
                 Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
+
+                var tileNode = TileMap.GetTile<TileBase>(coordinate);
+
+                
+
                 TileMap.SetColor(coordinate, Color.red);
             }
         }

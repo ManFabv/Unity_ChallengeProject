@@ -58,7 +58,7 @@ namespace PPop.Game.GridLevels
                 for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
                 {
                     InitializeTileMapTile(positionArray, mapIndex, xPos, yPos, tileArray, level);
-                    InitializeTile(level, mapIndex, tileValidator);
+                    InitializeTile(level, mapIndex, tileValidator, new Vector3Int(xPos, yPos, 0));
                     mapIndex++;
                 }
             }
@@ -66,11 +66,11 @@ namespace PPop.Game.GridLevels
             return (positionArray, tileArray);
         }
 
-        private void InitializeTile(List<string> level, int mapIndex, TileValidator tileValidator)
+        private void InitializeTile(List<string> level, int mapIndex, TileValidator tileValidator, Vector3Int positionTile)
         {
             var tileData = _reader.Read<TileScriptableObject>($"{_gameStaticsLevelValues.LevelRootTilesFolder}\\{level[mapIndex]}");
 
-            var tile = new TileNode {Cost = tileData.Cost, Representation = tileData.Representation};
+            var tile = new TileNode {Cost = tileData.Cost, Representation = tileData.Representation, Position = positionTile };
             tileValidator.Validate(tile);
 
             TilesData.Tiles.Add(tile);
