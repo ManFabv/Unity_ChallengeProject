@@ -15,12 +15,13 @@ namespace PPop.Tests.Domain.GridLevels
     {
         private GridLevel level;
         private ILoaderService _loaderService;
-        private IReader _reader;
+        private IGridLevelFactory _gridLevelFactory;
         private IGameStaticsLevelValues _gameStaticsLevelValues;
 
         [SetUp]
         public void CommonInstall()
         {
+            Container.Bind<IGridLevelFactory>().To<GridLevelFactory>().AsSingle();
             Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
             Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
             Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
@@ -29,9 +30,9 @@ namespace PPop.Tests.Domain.GridLevels
 
             _gameStaticsLevelValues = Container.Resolve<IGameStaticsLevelValues>();
             _loaderService = Container.Resolve<ILoaderService>();
-            _reader = Container.Resolve<IReader>();
+            _gridLevelFactory = Container.Resolve<IGridLevelFactory>();
 
-            level = new GridLevel(_loaderService, _reader, _gameStaticsLevelValues);
+            level = new GridLevel(_loaderService, _gameStaticsLevelValues, _gridLevelFactory);
         }
 
         [Test]

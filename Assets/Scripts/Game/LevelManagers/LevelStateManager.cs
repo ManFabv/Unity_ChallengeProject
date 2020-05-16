@@ -1,20 +1,38 @@
-﻿namespace PPop.Game.LevelManagers 
+﻿using System;
+using PPop.Core.Helpers;
+using PPop.Domain.Tiles;
+
+namespace PPop.Game.LevelManagers 
 {
-    public class LevelStateManager<T> : ILevelStateManager<T>
+    public class LevelStateManager<T> : Singleton<T>, ILevelStateManager<T> where T : TileNode, new()
     {
-        public void Init()
+        private IFSM<T> CurrentState;
+
+        public LevelStateManager(IFSM<T> initialState, T node)
         {
-            throw new System.NotImplementedException();
+            if (initialState is null) throw new ArgumentNullException($"Required initial state {typeof(IFSM<T>).Name} of parameter {nameof(initialState)} is null");
+
+            CurrentState = initialState;
+            CurrentState.Init(node);
         }
 
-        public void ChangeState(T newState)
+        public void Execute(T node)
         {
-            throw new System.NotImplementedException();
+            CurrentState.Execute(node);
         }
 
-        public T GetCurrentState()
+        public void ChangeState(IFSM<T> newState, T node)
         {
-            throw new System.NotImplementedException();
+            if (newState is null) throw new ArgumentNullException($"New state {typeof(IFSM<T>).Name} of parameter {nameof(newState)} is null");
+
+            CurrentState.Exit(node);
+            CurrentState = newState;
+            CurrentState.Init(node);
+        }
+
+        public Type GetCurrentState()
+        {
+            return CurrentState.GetType();
         }
     }
 }

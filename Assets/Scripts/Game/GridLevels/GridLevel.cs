@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using PPop.Domain.Levels;
 using PPop.Domain.Tiles;
-using PPop.Infrastructure.Helpers.FileAndDirectory;
 using PPop.Infrastructure.Services.Loader;
 using PPop.Infrastructure.Validators.Validators;
 using PPops.Domain.Statics.LevelStatics;
@@ -14,16 +13,17 @@ namespace PPop.Game.GridLevels
     public class GridLevel : ILevel 
     {
         private readonly ILoaderService _loaderService;
-        private readonly IReader _reader;
+        
         private readonly IGameStaticsLevelValues _gameStaticsLevelValues;
+        private readonly IGridLevelFactory _gridLevelFactory;
         private LevelTileData TilesData = new LevelTileData();
 
         [Inject]
-        public GridLevel(ILoaderService loaderService, IReader reader, IGameStaticsLevelValues gameStaticsLevelValues)
+        public GridLevel(ILoaderService loaderService, IGameStaticsLevelValues gameStaticsLevelValues, IGridLevelFactory gridLevelFactory)
         {
             _loaderService = loaderService;
-            _reader = reader;
             _gameStaticsLevelValues = gameStaticsLevelValues;
+            _gridLevelFactory = gridLevelFactory;
         }
 
         public void LoadLevel(string pathToLevel)
@@ -57,29 +57,13 @@ namespace PPop.Game.GridLevels
             {
                 for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
                 {
-                    InitializeTileMapTile(positionArray, mapIndex, xPos, yPos, tileArray, level);
-                    InitializeTile(level, mapIndex, tileValidator, new Vector3Int(xPos, yPos, 0));
+                    _gridLevelFactory.InitializeTileMapTile(positionArray, mapIndex, xPos, yPos, tileArray, level);
+                    _gridLevelFactory.InitializeTile(level, mapIndex, tileValidator, new Vector3Int(xPos, yPos, 0), TilesData.Tiles);
                     mapIndex++;
                 }
             }
 
             return (positionArray, tileArray);
-        }
-
-        private void InitializeTile(List<string> level, int mapIndex, TileValidator tileValidator, Vector3Int positionTile)
-        {
-            var tileData = _reader.Read<TileScriptableObject>($"{_gameStaticsLevelValues.LevelRootTilesFolder}\\{level[mapIndex]}");
-
-            var tile = new TileNode {Cost = tileData.Cost, Representation = tileData.Representation, Position = positionTile };
-            tileValidator.Validate(tile);
-
-            TilesData.Tiles.Add(tile);
-        }
-
-        private void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, TileBase[] tileArray, List<string> level)
-        {
-            positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
-            tileArray[mapIndex] = _reader.Read<TileBase>(level[mapIndex]);
         }
 
         public bool IsLoaded => TilesCount > 0;

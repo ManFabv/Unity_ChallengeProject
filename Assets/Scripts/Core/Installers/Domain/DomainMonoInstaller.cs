@@ -1,5 +1,7 @@
 using PPop.Domain.Levels;
+using PPop.Domain.Tiles;
 using PPop.Game.GridLevels;
+using PPop.Game.LevelManagers;
 using PPop.Infrastructure.Helpers.FileAndDirectory;
 using PPop.Infrastructure.Services.Loader;
 using PPop.Infrastructure.Validators.SchemaBuilder;
@@ -19,6 +21,8 @@ namespace PPop.Domain.Installers
             Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
             Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
             Container.Bind<ILevel>().To<GridLevel>().AsSingle();
+            Container.Bind<IGridLevelFactory>().To<GridLevelFactory>().AsSingle();
+            Container.Bind<ILevelStateManager<TileNode>>().To<LevelStateManager<TileNode>>().AsSingle();
         }
     }
 }

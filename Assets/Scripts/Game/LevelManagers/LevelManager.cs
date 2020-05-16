@@ -24,12 +24,14 @@ namespace PPop.Game.LevelManagers
 
         private TileNode _startTileNode;
         private TileNode _destinationTileNode;
+        private ILevelStateManager<TileNode> _levelStateManager;
 
         [Inject] 
-        void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues)
+        void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues, ILevelStateManager<TileNode> levelStateManager)
         {
             _level = level;
             _gameStaticsLevelValues = gameStaticsLevelValues;
+            _levelStateManager = levelStateManager;
         }
 
         void Awake()
@@ -58,8 +60,6 @@ namespace PPop.Game.LevelManagers
                 Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
 
                 var tileNode = TileMap.GetTile<TileBase>(coordinate);
-
-                
 
                 TileMap.SetColor(coordinate, Color.red);
             }
