@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
         var map = _level.GetFilledMap();
 
         TileMap.SetTiles(map.positions, map.tiles);
+        TileMap.ClearAllTileMapFlags(map.positions);
     }
 
     //TODO: only for testing purposes. Remove
@@ -46,7 +47,7 @@ public class LevelManager : MonoBehaviour
         {
             Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
-            var selectedTile = TileMap.GetTile(coordinate);
+            TileMap.SetColor(coordinate, Color.red);
         }
     }
 }
