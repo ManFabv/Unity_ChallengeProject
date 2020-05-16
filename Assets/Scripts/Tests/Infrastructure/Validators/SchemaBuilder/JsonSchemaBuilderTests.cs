@@ -1,8 +1,12 @@
 ﻿using System;
 using NUnit.Framework;
+using PPop.Domain.Levels;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
+using PPop.Infrastructure.Validators.SchemaBuilder;
+using PPops.Domain.Statics.LevelStatics;
 using Zenject;
 
-namespace Assets.Scripts.Tests.Infrastructure.Validators.SchemaBuilder
+namespace PPop.Tests.Infrastructure.Validators.SchemaBuilder
 {
     [TestFixture]
     public class JsonSchemaBuilderTests : ZenjectUnitTestFixture

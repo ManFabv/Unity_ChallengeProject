@@ -1,7 +1,9 @@
 using NUnit.Framework;
+using PPop.Domain.Tiles;
+using PPop.Infrastructure.Validators.Validators;
 using Zenject;
 
-namespace Assets.Scripts.Tests.Infrastructure.Validators.Validators
+namespace PPop.Tests.Infrastructure.Validators.Validators
 {
     [TestFixture]
     public class TileValidatorTests : ZenjectUnitTestFixture
@@ -17,7 +19,7 @@ namespace Assets.Scripts.Tests.Infrastructure.Validators.Validators
         [Test]
         public void TileIsInvalidCost_Test()
         {
-            var tileWithNegativeCost = new Tile()
+            var tileWithNegativeCost = new TileNode()
             {
                 Cost = -2,
                 Representation = "desert"
@@ -29,7 +31,7 @@ namespace Assets.Scripts.Tests.Infrastructure.Validators.Validators
         [Test]
         public void TileIsInvalidRepresentation_Test()
         {
-            var tileWithNegativePosition = new Tile()
+            var tileWithNegativePosition = new TileNode()
             {
                 Cost = -1,
                 Representation = string.Empty
@@ -41,7 +43,7 @@ namespace Assets.Scripts.Tests.Infrastructure.Validators.Validators
         [Test]
         public void TileIsEmptyCostAndPosition_Test()
         {
-            var tileInvalid = new Tile();
+            var tileInvalid = new TileNode();
             tileInvalid.Representation = string.Empty;
             tileInvalid.Cost = -2;
             var validationResults = tileValidator.Validate(tileInvalid);

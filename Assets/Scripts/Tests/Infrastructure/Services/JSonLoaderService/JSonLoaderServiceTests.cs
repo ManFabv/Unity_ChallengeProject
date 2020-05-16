@@ -1,8 +1,14 @@
 using System;
 using NUnit.Framework;
+using PPop.Domain.Levels;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
+using PPop.Infrastructure.Services.Loader;
+using PPop.Infrastructure.Validators.SchemaBuilder;
+using PPop.Infrastructure.Validators.Validators;
+using PPops.Domain.Statics.LevelStatics;
 using Zenject;
 
-namespace Assets.Scripts.Tests.Infrastructure.Services.JSonLoaderService
+namespace PPop.Tests.Infrastructure.Services.JSonLoaderServices
 {
     [TestFixture]
     public class JSonLoaderServiceTests : ZenjectUnitTestFixture
@@ -16,7 +22,7 @@ namespace Assets.Scripts.Tests.Infrastructure.Services.JSonLoaderService
             Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
             Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
             Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();
-            Container.Bind<ILoaderService>().To<global::JSonLoaderService>().AsSingle();
+            Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
             Container.Bind<IReader>().To<UnityResourcesReader>().AsSingle();
             _loaderService = Container.Resolve<ILoaderService>();
             _gameStaticsLevelValues = Container.Resolve<IGameStaticsLevelValues>();

@@ -1,12 +1,19 @@
 using NUnit.Framework;
+using PPop.Domain.Levels;
+using PPop.Game.GridLevels;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
+using PPop.Infrastructure.Services.Loader;
+using PPop.Infrastructure.Validators.SchemaBuilder;
+using PPop.Infrastructure.Validators.Validators;
+using PPops.Domain.Statics.LevelStatics;
 using Zenject;
 
-namespace Assets.Scripts.Tests.Domain.GridLevel
+namespace PPop.Tests.Domain.GridLevels
 {
     [TestFixture]
     public class GridLevelTests : ZenjectUnitTestFixture
     {
-        private global::GridLevel level;
+        private GridLevel level;
         private ILoaderService _loaderService;
         private IReader _reader;
         private IGameStaticsLevelValues _gameStaticsLevelValues;
@@ -24,7 +31,7 @@ namespace Assets.Scripts.Tests.Domain.GridLevel
             _loaderService = Container.Resolve<ILoaderService>();
             _reader = Container.Resolve<IReader>();
 
-            level = new global::GridLevel(_loaderService, _reader, _gameStaticsLevelValues);
+            level = new GridLevel(_loaderService, _reader, _gameStaticsLevelValues);
         }
 
         [Test]

@@ -1,45 +1,49 @@
 ﻿using System;
+using PPops.Domain.Statics.LevelStatics;
 using UnityEngine;
 using Zenject;
 
-public class UnityResourcesReader : IReader
+namespace PPop.Infrastructure.Helpers.FileAndDirectory
 {
-    private readonly IGameStaticsLevelValues _gameStaticsLevelValues;
-
-    [Inject]
-    public UnityResourcesReader(IGameStaticsLevelValues gameStaticsLevelValues)
+    public class UnityResourcesReader : IReader
     {
-        _gameStaticsLevelValues = gameStaticsLevelValues;
-    }
+        private readonly IGameStaticsLevelValues _gameStaticsLevelValues;
 
-    public T Read<T>(string fileName) where T : UnityEngine.Object
-    {
-        try
+        [Inject]
+        public UnityResourcesReader(IGameStaticsLevelValues gameStaticsLevelValues)
         {
-            var targetFile = Resources.Load<T>(fileName);
-            return targetFile;
+            _gameStaticsLevelValues = gameStaticsLevelValues;
         }
 
-        catch (NullReferenceException)
+        public T Read<T>(string fileName) where T : UnityEngine.Object
         {
-            throw new ArgumentException($"File: {fileName} not found in a Resources folder");
+            try
+            {
+                var targetFile = Resources.Load<T>(fileName);
+                return targetFile;
+            }
+
+            catch (NullReferenceException)
+            {
+                throw new ArgumentException($"File: {fileName} not found in a Resources folder");
+            }
         }
-    }
 
-    public string Read(string fileName)
-    {
-        var result = Read<TextAsset>(fileName);
+        public string Read(string fileName)
+        {
+            var result = Read<TextAsset>(fileName);
 
-        if(result is null)
-            throw new ArgumentException($"File: {fileName} not found in a Resources folder");
+            if(result is null)
+                throw new ArgumentException($"File: {fileName} not found in a Resources folder");
 
-        return result.text;
-    }
+            return result.text;
+        }
 
-    public string ReadSchema(Type typeOfSchema)
-    {
-        var fileName = $"{_gameStaticsLevelValues.LevelSchemaRootFolder}\\{typeOfSchema}{_gameStaticsLevelValues.LevelSchemaRootName}";
+        public string ReadSchema(Type typeOfSchema)
+        {
+            var fileName = $"{_gameStaticsLevelValues.LevelSchemaRootFolder}\\{typeOfSchema.Name}{_gameStaticsLevelValues.LevelSchemaRootName}";
 
-        return Read(fileName);
+            return Read(fileName);
+        }
     }
 }

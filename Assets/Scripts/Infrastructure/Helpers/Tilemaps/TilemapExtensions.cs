@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public static class TilemapExtensions
+namespace PPop.Infrastructure.Helpers.Tilemaps
 {
-    public static void SetAllTilemapFlags(this Tilemap sourceTilemap, Vector3Int[] tilePositions, TileFlags flags)
+    public static class TilemapExtensions
     {
-        foreach (var tilePosition in tilePositions)
+        public static void SetAllTilemapFlags(this Tilemap sourceTilemap, Vector3Int[] tilePositions, TileFlags flags)
         {
-            sourceTilemap.SetTileFlags(tilePosition, flags);
+            foreach (var tilePosition in tilePositions)
+            {
+                sourceTilemap.SetTileFlags(tilePosition, flags);
+            }
         }
-    }
 
-    public static void ClearAllTileMapFlags(this Tilemap sourceTilemap, Vector3Int[] tilePositions)
-    {
-        SetAllTilemapFlags(sourceTilemap, tilePositions, TileFlags.None);
+        public static void ClearAllTileMapFlags(this Tilemap sourceTilemap, Vector3Int[] tilePositions)
+        {
+            SetAllTilemapFlags(sourceTilemap, tilePositions, TileFlags.None);
+        }
     }
 }

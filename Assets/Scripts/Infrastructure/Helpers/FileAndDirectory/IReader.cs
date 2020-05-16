@@ -1,10 +1,13 @@
 ﻿using System;
 
-public interface IReader
+namespace PPop.Infrastructure.Helpers.FileAndDirectory
 {
-    T Read<T>(string fileName) where T : UnityEngine.Object;
+    public interface IReader
+    {
+        T Read<T>(string fileName) where T : UnityEngine.Object;
     
-    string Read(string fileName);
+        string Read(string fileName);
 
-    string ReadSchema(Type typeOfSchema);
+        string ReadSchema(Type typeOfSchema);
+    }
 }

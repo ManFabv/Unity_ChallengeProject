@@ -1,8 +1,11 @@
 using System;
 using NUnit.Framework;
+using PPop.Domain.Levels;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
+using PPops.Domain.Statics.LevelStatics;
 using Zenject;
 
-namespace Assets.Scripts.Tests.Infrastructure.Helpers.Readers
+namespace PPop.Tests.Infrastructure.Helpers.Readers
 {
     [TestFixture]
     public class ReaderTests : ZenjectUnitTestFixture

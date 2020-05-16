@@ -1,4 +1,7 @@
-﻿public interface ILoaderService
+﻿namespace PPop.Infrastructure.Services.Loader
 {
-     T Read<T>(string fileName);
+     public interface ILoaderService
+     {
+          T Read<T>(string fileName);
+     }
 }

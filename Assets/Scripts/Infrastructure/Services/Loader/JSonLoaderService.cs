@@ -1,34 +1,39 @@
 ﻿using System;
 using Newtonsoft.Json;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
+using PPop.Infrastructure.Validators.Validators;
 using Zenject;
 
-public class JSonLoaderService : ILoaderService 
+namespace PPop.Infrastructure.Services.Loader
 {
-    private readonly IReader _reader;
-    private readonly ISchemaValidator _schemaValidator;
-
-    [Inject]
-    public JSonLoaderService(IReader reader, ISchemaValidator schemaValidator)
+    public class JSonLoaderService : ILoaderService 
     {
-        _reader = reader;
-        _schemaValidator = schemaValidator;
-    }
+        private readonly IReader _reader;
+        private readonly ISchemaValidator _schemaValidator;
 
-    public T Read<T>(string fileName)
-    {
-        var json = _reader.Read(fileName);
-
-        if (!_schemaValidator.ValidateAsSchemaType<T>(json))
-            throw new ArgumentException($"File {fileName} doesn't comply with schema for type {typeof(T)}");
-
-        try
+        [Inject]
+        public JSonLoaderService(IReader reader, ISchemaValidator schemaValidator)
         {
-            var result = JsonConvert.DeserializeObject<T>(json);
-            return result;
+            _reader = reader;
+            _schemaValidator = schemaValidator;
         }
-        catch (JsonException)
+
+        public T Read<T>(string fileName)
         {
-            throw new ArgumentException($"Error while trying to read file {fileName}");
+            var json = _reader.Read(fileName);
+
+            if (!_schemaValidator.ValidateAsSchemaType<T>(json))
+                throw new ArgumentException($"File {fileName} doesn't comply with schema for type {typeof(T).Name}");
+
+            try
+            {
+                var result = JsonConvert.DeserializeObject<T>(json);
+                return result;
+            }
+            catch (JsonException)
+            {
+                throw new ArgumentException($"Error while trying to read file {fileName}");
+            }
         }
     }
 }

@@ -1,8 +1,9 @@
 using NUnit.Framework;
+using PPop.Infrastructure.Helpers.Math;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.Tests.Infrastructure.Helpers.Math
+namespace PPop.Tests.Infrastructure.Helpers.Math
 {
     [TestFixture]
     public class Vector3ExtensionsTests : ZenjectUnitTestFixture

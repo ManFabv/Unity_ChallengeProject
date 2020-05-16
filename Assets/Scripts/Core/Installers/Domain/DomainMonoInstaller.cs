@@ -1,6 +1,13 @@
+using PPop.Domain.Levels;
+using PPop.Game.GridLevels;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
+using PPop.Infrastructure.Services.Loader;
+using PPop.Infrastructure.Validators.SchemaBuilder;
+using PPop.Infrastructure.Validators.Validators;
+using PPops.Domain.Statics.LevelStatics;
 using Zenject;
 
-namespace Assets.Scripts.Core.Installers.Domain
+namespace PPop.Domain.Installers
 {
     public class DomainMonoInstaller : MonoInstaller
     {

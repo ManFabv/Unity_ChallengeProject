@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Assets.Editor.Build
+namespace PPop.Editor.Build
 {
     public class BuildiOS : MonoBehaviour
     {
