@@ -54,12 +54,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5318690275814651839}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0276de6599a0ae14da52301983f5373d, type: 3}
+  m_Script: {fileID: 11500000, guid: 76a53f397e73bd24e8cc337c3785d0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Tile: {fileID: 11400000, guid: c467190ffcbdf0c4ab367860573b975b, type: 2}
-  MapSize: 8
-  LevelRootFolder: Levels
   CurrentLevel: 1
 --- !u!1 &6983785201501757370
 GameObject:

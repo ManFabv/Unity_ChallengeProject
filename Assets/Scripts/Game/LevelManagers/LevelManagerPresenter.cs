@@ -9,7 +9,7 @@ using Zenject;
 namespace PPop.Game.LevelManagers
 {
     [RequireComponent(typeof(Grid))]
-    public class LevelManager : MonoBehaviour 
+    public class LevelManagerPresenter : MonoBehaviour 
     {
         private Tilemap TileMap;
 
@@ -54,6 +54,8 @@ namespace PPop.Game.LevelManagers
         //TODO: only for testing purposes. Remove
         void Update()
         {
+            _levelStateManager.Execute(null); //TODO: what is the parameter?
+
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);

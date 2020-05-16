@@ -15,6 +15,8 @@ namespace PPop.Domain.Installers
     {
         public override void InstallBindings()
         {
+            Container.Bind<TileNode>().AsTransient();
+            Container.Bind<IFSM<TileNode>>().To<TileMap_Status_Idle<TileNode>>().AsSingle();
             Container.Bind<IGameStaticsLevelValues>().To<GameStaticsLevelValues>().AsSingle();
             Container.Bind<ISchemaBuilder>().To<JsonSchemaBuilder>().AsSingle();
             Container.Bind<ISchemaValidator>().To<JsonSchemaValidator>().AsSingle();

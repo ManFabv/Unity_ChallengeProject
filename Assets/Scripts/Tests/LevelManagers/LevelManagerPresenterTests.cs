@@ -9,7 +9,7 @@ using PPop.Game.LevelManagers;
 namespace PPop.Tests.LevelManagers
 {
     [TestFixture]
-    public class LevelManagerTests : ZenjectUnitTestFixture
+    public class LevelManagerPresenterTests : ZenjectUnitTestFixture
     {
         private LevelStateManager<TileNode> _levelStateManager;
         private TileNode tileNodeMock;

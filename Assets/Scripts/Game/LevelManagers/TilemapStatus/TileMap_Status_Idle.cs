@@ -1,25 +1,21 @@
 ﻿using System;
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
+using UnityEngine;
 
 namespace PPop.Game.LevelManagers 
 {
     public class TileMap_Status_Idle<T> : Singleton<T>, IFSM<T> where T : TileNode, new()
     {
-        public void Init(T node)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Init(T node) {}
 
         public void Execute(T node)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("Esperando click");
+            //throw new System.NotImplementedException();
         }
 
-        public void Exit(T node)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Exit(T node) {}
 
         public Type StateType() => this.GetType();
     }
