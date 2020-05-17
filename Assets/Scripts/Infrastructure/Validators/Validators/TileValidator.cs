@@ -1,22 +1,26 @@
 ﻿using FluentValidation;
+using PPop.Domain.Tiles;
 
-public class TileValidator : AbstractValidator<Tile>
+namespace PPop.Infrastructure.Validators.Validators
 {
-    public TileValidator()
+    public class TileValidator : AbstractValidator<TileNode>
     {
-        RuleFor(t => t.Cost)
-            .Cascade(CascadeMode.StopOnFirstFailure)
-            .NotNull().WithMessage("{PropertyName} shouldn't be null")
-            .Must(BeAnIntValueInRange).WithMessage("{PropertyName} is not a valid value");
+        public TileValidator()
+        {
+            RuleFor(t => t.Cost)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull().WithMessage("{PropertyName} shouldn't be null")
+                .Must(BeAnIntValueInRange).WithMessage("{PropertyName} is not a valid value");
 
-        RuleFor(t => t.Representation)
-            .Cascade(CascadeMode.StopOnFirstFailure)
-            .NotNull().WithMessage("{PropertyName} shouldn't be null")
-            .NotEmpty().WithMessage("{PropertyName} shouldn't be null");
-    }
+            RuleFor(t => t.Representation)
+                .Cascade(CascadeMode.StopOnFirstFailure)
+                .NotNull().WithMessage("{PropertyName} shouldn't be null")
+                .NotEmpty().WithMessage("{PropertyName} shouldn't be null");
+        }
 
-    private bool BeAnIntValueInRange(int intValue)
-    {
-        return intValue >= -1;
+        private bool BeAnIntValueInRange(int intValue)
+        {
+            return intValue >= -1;
+        }
     }
 }

@@ -1,29 +1,35 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
+using PPop.Infrastructure.Validators.SchemaBuilder;
 using Zenject;
 
-public class JsonSchemaValidator : ISchemaValidator
+namespace PPop.Infrastructure.Validators.Validators
 {
-    private readonly ISchemaBuilder _schemaBuilder;
-
-    [Inject]
-    public JsonSchemaValidator(ISchemaBuilder schemaBuilder)
+    public class JsonSchemaValidator : ISchemaValidator
     {
-        _schemaBuilder = schemaBuilder;
-    }
+        private readonly ISchemaBuilder _schemaBuilder;
 
-    public bool ValidateAsSchemaType<T>(string sourceObjectInfo)
-    {
-        try
+        [Inject]
+        public JsonSchemaValidator(ISchemaBuilder schemaBuilder)
+        {
+            _schemaBuilder = schemaBuilder;
+        }
+
+        public bool ValidateAsSchemaType<T>(string sourceObjectInfo)
         {
             var schema = _schemaBuilder.Build(typeof(T));
-            var targetJObject = JObject.Parse(sourceObjectInfo);
-            return targetJObject.IsValid(schema);
-        }
-        catch (Newtonsoft.Json.JsonReaderException)
-        {
-            throw new ArgumentException($"Error trying to validate schema for type: {typeof(T)}, against object: {sourceObjectInfo}");
+
+            try
+            {
+                var targetJObject = JObject.Parse(sourceObjectInfo);
+                return targetJObject.IsValid(schema);
+            }
+
+            catch (Newtonsoft.Json.JsonReaderException)
+            {
+                throw new ArgumentException($"Error trying to validate schema for type: {typeof(T)}, against object: {sourceObjectInfo}");
+            }
         }
     }
 }

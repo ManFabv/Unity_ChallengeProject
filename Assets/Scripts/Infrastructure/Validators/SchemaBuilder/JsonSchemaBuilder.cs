@@ -1,21 +1,35 @@
 ﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
+using PPop.Infrastructure.Helpers.FileAndDirectory;
 using Zenject;
 
-public class JsonSchemaBuilder : ISchemaBuilder
+namespace PPop.Infrastructure.Validators.SchemaBuilder
 {
-    private readonly IReader _reader;
-
-    [Inject]
-    public JsonSchemaBuilder(IReader reader)
+    public class JsonSchemaBuilder : ISchemaBuilder
     {
-        _reader = reader;
-    }
+        private readonly IReader _reader;
 
-    public JSchema Build(Type schemaAsType)
-    {
-        var schemaAsText = _reader.ReadSchema(schemaAsType);
-        var schema = JSchema.Parse(schemaAsText);
-        return schema;
+        [Inject]
+        public JsonSchemaBuilder(IReader reader)
+        {
+            _reader = reader;
+        }
+
+        public JSchema Build(Type schemaAsType)
+        {
+            var schemaAsText = _reader.ReadSchema(schemaAsType);
+
+            try
+            {
+                var schema = JSchema.Parse(schemaAsText);
+                return schema;
+            }
+
+            catch (JsonException)
+            {
+                throw new ArgumentException($"Schema {schemaAsText} couldn't be validated");
+            }
+        }
     }
 }

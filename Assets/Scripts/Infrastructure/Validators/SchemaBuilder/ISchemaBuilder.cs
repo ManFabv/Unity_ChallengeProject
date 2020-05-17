@@ -1,7 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json.Schema;
 
-public interface ISchemaBuilder
+namespace PPop.Infrastructure.Validators.SchemaBuilder
 {
-    JSchema Build(Type schemaAsType);
+    public interface ISchemaBuilder
+    {
+        JSchema Build(Type schemaAsType);
+    }
 }

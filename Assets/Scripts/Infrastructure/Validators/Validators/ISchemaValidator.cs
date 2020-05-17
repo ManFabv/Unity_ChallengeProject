@@ -1,4 +1,7 @@
-﻿public interface ISchemaValidator
+﻿namespace PPop.Infrastructure.Validators.Validators
 {
-    bool ValidateAsSchemaType<T>(string sourceObjectInfo);
+    public interface ISchemaValidator
+    {
+        bool ValidateAsSchemaType<T>(string sourceObjectInfo);
+    }
 }
