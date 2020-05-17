@@ -16,7 +16,7 @@ namespace PPop.Game.LevelManagers
 
         public void Execute(TileNode node)
         {
-            _currentState.Execute(node);
+            _currentState.Execute(node, this);
         }
 
         public void ChangeState(ITileMapStatus<TileNode> newState, TileNode node)

@@ -1,21 +1,27 @@
-﻿using PPop.Domain.Tiles;
+﻿using System;
+using PPop.Core.Helpers;
+using PPop.Domain.Tiles;
 using UnityEngine;
 
 namespace PPop.Game.LevelManagers.TilemapStatus 
 {
-    public class TileMap_Status_Idle<T> : TileMapStatusBase<T>, ITileMapStatus<T> where T : TileNode, new() 
+    public class TileMap_Status_Idle : Singleton<TileMap_Status_Idle>, ITileMapStatus<TileNode>
     {
-        public void Init(T node)
+        public void Init(TileNode node)
         {
-            Debug.Log("Esperando click en inicio");
+            Debug.Log("TileMap_Status_Idle");
         }
 
-        public void Execute(T node)
+        public void Execute(TileNode node, ILevelStateManager levelStateManager)
         {
             if(node != null)
-                Debug.Log("TILE ELEGIDO");
+                levelStateManager.ChangeState(TileMap_Status_SelectedStart.Instance, node);
         }
 
-        public void Exit(T node) {}
+        public void Exit(TileNode node)
+        {
+        }
+
+        public Type StateType() => this.GetType();
     }
 }

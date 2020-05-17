@@ -1,4 +1,5 @@
 using System;
+using Moq;
 using Zenject;
 using NUnit.Framework;
 using PPop.Core.Helpers;
@@ -14,6 +15,7 @@ namespace PPop.Tests.LevelManagers
         private MockStatusSelected<TileNode> tileNodeFSMSelected;
         private TileNode tileNodeMock;
         private MockStatusIdle<TileNode> tileNodeFSMMockIdle;
+        private ILevelStateManager levelStateManagerMock;
 
         [SetUp]
         public void CommonInstall()
@@ -21,13 +23,14 @@ namespace PPop.Tests.LevelManagers
             tileNodeFSMSelected = new MockStatusSelected<TileNode>();
             tileNodeMock = ScriptableObject.CreateInstance<TileNode>(); ;
             tileNodeFSMMockIdle = new MockStatusIdle<TileNode>();
+            levelStateManagerMock = new Mock<ILevelStateManager>().Object;
         }
 
         [Test]
         public void CanExecuteStepsOfStatus_Test()
         {
             Assert.DoesNotThrow(() => tileNodeFSMSelected.Init(tileNodeMock));
-            Assert.DoesNotThrow(() => tileNodeFSMSelected.Execute(tileNodeMock));
+            Assert.DoesNotThrow(() => tileNodeFSMSelected.Execute(tileNodeMock, levelStateManagerMock));
             Assert.DoesNotThrow(() => tileNodeFSMSelected.Exit(tileNodeMock));
         }
 
@@ -35,11 +38,11 @@ namespace PPop.Tests.LevelManagers
         public void CanChangeStatus_Test()
         {
             Assert.DoesNotThrow(() => tileNodeFSMSelected.Init(tileNodeMock));
-            Assert.DoesNotThrow(() => tileNodeFSMSelected.Execute(tileNodeMock));
+            Assert.DoesNotThrow(() => tileNodeFSMSelected.Execute(tileNodeMock, levelStateManagerMock));
             Assert.DoesNotThrow(() => tileNodeFSMSelected.Exit(tileNodeMock));
 
             Assert.DoesNotThrow(() => tileNodeFSMMockIdle.Init(tileNodeMock));
-            Assert.DoesNotThrow(() => tileNodeFSMMockIdle.Execute(tileNodeMock));
+            Assert.DoesNotThrow(() => tileNodeFSMMockIdle.Execute(tileNodeMock, levelStateManagerMock));
             Assert.DoesNotThrow(() => tileNodeFSMMockIdle.Exit(tileNodeMock));
 
             Assert.AreNotEqual(tileNodeFSMMockIdle.StateType(), tileNodeFSMSelected.StateType());
@@ -47,14 +50,14 @@ namespace PPop.Tests.LevelManagers
 
         private class MockStatusSelected<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() {
             public void Init(T node) { }
-            public void Execute(T node) { }
+            public void Execute(T node, ILevelStateManager levelStateManager) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }
 
         private class MockStatusIdle<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() {
             public void Init(T node) { }
-            public void Execute(T node) { }
+            public void Execute(T node, ILevelStateManager levelStateManager) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }
