@@ -12,8 +12,8 @@ namespace PPop.Editor.Build
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS);
 
             EditorUserBuildSettings.symlinkLibraries = true;
-            EditorUserBuildSettings.development = false;
-            EditorUserBuildSettings.allowDebugging = false;
+            EditorUserBuildSettings.development = true;
+            EditorUserBuildSettings.allowDebugging = true;
 
             List<string> scenes = new List<string>();
             for (int i = 0; i < EditorBuildSettings.scenes.Length; i++)

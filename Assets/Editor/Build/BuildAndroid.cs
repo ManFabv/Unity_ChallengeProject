@@ -12,8 +12,8 @@ namespace PPop.Editor.Build
             EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
 
             EditorUserBuildSettings.symlinkLibraries = true;
-            EditorUserBuildSettings.development = false;
-            EditorUserBuildSettings.allowDebugging = false;
+            EditorUserBuildSettings.development = true;
+            EditorUserBuildSettings.allowDebugging = true;
             EditorUserBuildSettings.exportAsGoogleAndroidProject = true;
 
             List<string> scenes = new List<string>();
