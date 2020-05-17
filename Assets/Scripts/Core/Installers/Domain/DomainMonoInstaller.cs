@@ -25,7 +25,7 @@ namespace PPop.Domain.Installers
             Container.Bind<ILoaderService>().To<JSonLoaderService>().AsSingle();
             Container.Bind<ILevel>().To<GridLevel>().AsSingle();
             Container.Bind<IGridLevelFactory>().To<GridLevelFactory>().AsSingle();
-            Container.Bind<ILevelStateManager<TileNode>>().To<LevelStateManager<TileNode>>().AsSingle();
+            Container.Bind<ILevelStateManager>().To<LevelStateManager>().AsSingle();
         }
     }
 }

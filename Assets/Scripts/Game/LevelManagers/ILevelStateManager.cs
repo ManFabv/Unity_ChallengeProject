@@ -1,11 +1,12 @@
 ﻿using System;
+using PPop.Domain.Tiles;
 
 namespace PPop.Game.LevelManagers 
 {
-    public interface ILevelStateManager<T>
+    public interface ILevelStateManager
     {
-        void Execute(T node);
-        void ChangeState(ITileMapStatus<T> newState, T node);
+        void Execute(TileNode node);
+        void ChangeState(ITileMapStatus<TileNode> newState, TileNode node);
         Type GetCurrentState();
     }
 }

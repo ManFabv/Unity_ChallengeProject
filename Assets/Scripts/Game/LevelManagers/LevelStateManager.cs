@@ -1,25 +1,27 @@
 ﻿using System;
 using PPop.Domain.Tiles;
+using Zenject;
 
 namespace PPop.Game.LevelManagers 
 {
-    public class LevelStateManager<T> : ILevelStateManager<T> where T : TileNode, new()
+    public class LevelStateManager : ILevelStateManager
     {
-        private ITileMapStatus<T> _currentState;
+        private ITileMapStatus<TileNode> _currentState;
 
-        public LevelStateManager(ITileMapStatus<T> initialState, T node)
+        [Inject]
+        public LevelStateManager(ITileMapStatus<TileNode> initialState, TileNode node)
         {
             ChangeState(initialState, node);
         }
 
-        public void Execute(T node)
+        public void Execute(TileNode node)
         {
             _currentState.Execute(node);
         }
 
-        public void ChangeState(ITileMapStatus<T> newState, T node)
+        public void ChangeState(ITileMapStatus<TileNode> newState, TileNode node)
         {
-            if (newState is null) throw new ArgumentNullException($"New state {typeof(ITileMapStatus<T>).Name} of parameter {nameof(newState)} is null");
+            if (newState is null) throw new ArgumentNullException($"New state {typeof(ITileMapStatus<TileNode>).Name} of parameter {nameof(newState)} is null");
 
             _currentState?.Exit(node);
             _currentState = newState;

@@ -11,7 +11,7 @@ namespace PPop.Tests.LevelManagers
     [TestFixture]
     public class LevelManagerPresenterTests : ZenjectUnitTestFixture
     {
-        private LevelStateManager<TileNode> _levelStateManager;
+        private LevelStateManager _levelStateManager;
         private TileNode tileNodeMock;
         private MockStatusIdle<TileNode> tileNodeFSMMockIdle;
         private MockStatusSelected<TileNode> tileNodeFSMSelected;
@@ -22,20 +22,20 @@ namespace PPop.Tests.LevelManagers
             tileNodeMock = ScriptableObject.CreateInstance<TileNode>(); ;
             tileNodeFSMMockIdle = new MockStatusIdle<TileNode>();
             tileNodeFSMSelected = new MockStatusSelected<TileNode>();
-            _levelStateManager = new LevelStateManager<TileNode>(tileNodeFSMMockIdle, tileNodeMock);
+            _levelStateManager = new LevelStateManager(tileNodeFSMMockIdle, tileNodeMock);
         }
 
         [Test]
         public void CanInitAndExecuteState_Test()
         {
-            Assert.DoesNotThrow(() => _levelStateManager = new LevelStateManager<TileNode>(tileNodeFSMMockIdle, tileNodeMock));
+            Assert.DoesNotThrow(() => _levelStateManager = new LevelStateManager(tileNodeFSMMockIdle, tileNodeMock));
             Assert.DoesNotThrow(() => _levelStateManager.Execute(tileNodeMock));
         }
 
         [Test]
         public void CanChangeAndExitState_Test()
         {
-            Assert.DoesNotThrow(() => _levelStateManager = new LevelStateManager<TileNode>(tileNodeFSMMockIdle, tileNodeMock));
+            Assert.DoesNotThrow(() => _levelStateManager = new LevelStateManager(tileNodeFSMMockIdle, tileNodeMock));
             Assert.DoesNotThrow(() => _levelStateManager.Execute(tileNodeMock));
             Assert.DoesNotThrow(() => _levelStateManager.ChangeState(tileNodeFSMSelected, tileNodeMock));
             Assert.DoesNotThrow(() => _levelStateManager.Execute(tileNodeMock));
@@ -44,7 +44,7 @@ namespace PPop.Tests.LevelManagers
         [Test]
         public void CannotWorkWithEmptyState_Test()
         {
-            Assert.Throws<ArgumentNullException>(() => _levelStateManager = new LevelStateManager<TileNode>(null, tileNodeMock));
+            Assert.Throws<ArgumentNullException>(() => _levelStateManager = new LevelStateManager(null, tileNodeMock));
             Assert.Throws<ArgumentNullException>(() => _levelStateManager.ChangeState(null, tileNodeMock));
         }
 

@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace PPop.Domain.Tiles
 {
-    public class TileNode : TileBase, IAStarNode 
+    public class TileNode : TileBase, IAStarNode
     {
         public int Cost;
         public string Representation;

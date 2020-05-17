@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using PPop.Domain.Tiles;
 using PPop.Infrastructure.Helpers.FileAndDirectory;
 using PPop.Infrastructure.Validators.Validators;
@@ -22,7 +21,7 @@ namespace PPop.Game.GridLevels
             _gameStaticsLevelValues = gameStaticsLevelValues;
         }
 
-        public void InitializeTile(List<string> level, int mapIndex, TileValidator tileValidator, Vector3Int positionTile, List<TileNode> Tiles)
+        public void InitializeTile(string[] level, int mapIndex, Vector3Int tilePosition, TileNode[] tiles)
         {
             var tileData = _reader.Read<TileScriptableObject>($"{_gameStaticsLevelValues.LevelRootTilesFolder}\\{level[mapIndex]}");
 
@@ -30,19 +29,19 @@ namespace PPop.Game.GridLevels
 
             tile.Cost = tileData.Cost;
             tile.Representation = tileData.Representation;
-            tile.Position = positionTile;
+            tile.Position = tilePosition;
 
+            var tileValidator = new TileValidator();
             var validations = tileValidator.Validate(tile);
-
             if (validations.Errors.Count > 0) throw new ArgumentException("Find following errors in tiles: " + string.Join(", ", validations.Errors));
 
-            Tiles.Add(tile);
+            tiles[mapIndex] = tile;
         }
 
-        public void InitializeTileMapTile(List<Vector3Int> positionArray, int xPos, int yPos, List<TileBase> tileArray, string levelRepresentation)
+        public void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, TileBase[] tileBaseArray, string levelRepresentation)
         {
-            positionArray.Add(new Vector3Int(xPos, yPos, 0));
-            tileArray.Add(_reader.Read<TileBase>(levelRepresentation));
+            positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
+            tileBaseArray[mapIndex] = _reader.Read<TileBase>(levelRepresentation);
         }
     }
 }

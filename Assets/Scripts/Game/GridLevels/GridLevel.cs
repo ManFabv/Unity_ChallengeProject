@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using PPop.Domain.Levels;
 using PPop.Domain.Tiles;
 using PPop.Infrastructure.Services.Loader;
-using PPop.Infrastructure.Validators.Validators;
 using PPops.Domain.Statics.LevelStatics;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -47,30 +46,33 @@ namespace PPop.Game.GridLevels
 
         public (Vector3Int[] positions, TileBase[] tiles) GetFilledMap()
         {
-            var MapSize = TilesData.MapSize;
-            var halfMapSize = MapSize / 2;
+            var mapSize = TilesData.MapSize;
+            var halfMapSize = mapSize / 2;
+            var fullMapSize = mapSize * mapSize;
 
             var level = TilesData.Level;
-            TilesData.Tiles = new List<TileNode>();
-
-            var tileValidator = new TileValidator();
-
-            var positionArray = new List<Vector3Int>();
-            var tileArray = new List<TileBase>();
-            TilesData.Tiles = new List<TileNode>();
+            
+            var tileNodeArray = TilesData.TileNodes = new TileNode[fullMapSize];
+            var tilePositionArray = new Vector3Int[fullMapSize];
+            var tileBaseArray = new TileBase[fullMapSize];
         
             int mapIndex = 0;
             for (int yPos = halfMapSize; yPos > -halfMapSize; yPos--)
             {
                 for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
                 {
-                    _gridLevelFactory.InitializeTileMapTile(positionArray, xPos, yPos, tileArray, level[mapIndex]);
-                    _gridLevelFactory.InitializeTile(level, mapIndex, tileValidator, new Vector3Int(xPos, yPos, 0), TilesData.Tiles);
+                    _gridLevelFactory.InitializeTileMapTile(tilePositionArray, mapIndex, xPos, yPos, tileBaseArray, level[mapIndex]);
+                    _gridLevelFactory.InitializeTile(level, mapIndex, new Vector3Int(xPos, yPos, 0), tileNodeArray);
                     mapIndex++;
                 }
             }
             
-            return (positionArray.ToArray(), tileArray.ToArray());
+            return (tilePositionArray, tileBaseArray);
+        }
+
+        public TileNode GetTileNodeAtPosition(Vector3Int tilePosition)
+        {
+            return TilesData?.TileNodes?.FirstOrDefault(tile => tile.Position == tilePosition);
         }
 
         public bool IsLoaded => TilesCount > 0;

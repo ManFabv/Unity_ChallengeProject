@@ -21,19 +21,16 @@ namespace PPop.Game.LevelManagers
 
         private Camera MainCamera;
         private Grid GridTileMap;
+        private ILevelStateManager _levelStateManager;
 
-        private TileNode _startTileNode;
-        private TileNode _destinationTileNode;
-        private TileBase _selectedTileNode;
-        private ILevelStateManager<TileNode> _levelStateManager;
+        private TileNode _selectedTileNode;
 
         [Inject] 
-        void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues, ILevelStateManager<TileNode> levelStateManager)
+        void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues, ILevelStateManager levelStateManager)
         {
             _level = level;
             _gameStaticsLevelValues = gameStaticsLevelValues;
             _levelStateManager = levelStateManager;
-            _selectedTileNode = ScriptableObject.CreateInstance<TileNode>();
         }
 
         void Awake()
@@ -57,15 +54,15 @@ namespace PPop.Game.LevelManagers
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
-                Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
+                var mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var coordinate = GridTileMap.WorldToCell(mouseWorldPos);
 
-                _selectedTileNode = TileMap.GetTile<TileBase>(coordinate);
+                _selectedTileNode = _level.GetTileNodeAtPosition(coordinate);
 
                 TileMap.SetColor(coordinate, Color.red);
             }
-            
-            _levelStateManager.Execute(_selectedTileNode as TileNode);
+
+            _levelStateManager.Execute(_selectedTileNode);
         }
     }
 }

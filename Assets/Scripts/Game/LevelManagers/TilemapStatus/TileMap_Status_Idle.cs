@@ -12,6 +12,8 @@ namespace PPop.Game.LevelManagers.TilemapStatus
 
         public void Execute(T node)
         {
+            if(node != null)
+                Debug.Log("TILE ELEGIDO");
         }
 
         public void Exit(T node) {}
