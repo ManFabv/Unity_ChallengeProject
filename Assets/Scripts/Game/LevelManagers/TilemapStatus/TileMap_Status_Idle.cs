@@ -3,7 +3,7 @@ using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
 using UnityEngine;
 
-namespace PPop.Game.LevelManagers 
+namespace PPop.Game.LevelManagers.TilemapStatus 
 {
     public class TileMap_Status_Idle<T> : Singleton<T>, IFSM<T> where T : TileNode, new()
     {

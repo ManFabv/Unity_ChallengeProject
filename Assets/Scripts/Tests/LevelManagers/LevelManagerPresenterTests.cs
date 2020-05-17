@@ -1,10 +1,11 @@
 using System;
-using Moq;
 using Zenject;
 using NUnit.Framework;
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
 using PPop.Game.LevelManagers;
+using PPop.Game.LevelManagers.TilemapStatus;
+using UnityEngine;
 
 namespace PPop.Tests.LevelManagers
 {
@@ -19,7 +20,7 @@ namespace PPop.Tests.LevelManagers
         [SetUp]
         public void CommonInstall()
         {
-            tileNodeMock = new Mock<TileNode>().Object;
+            tileNodeMock = ScriptableObject.CreateInstance<TileNode>(); ;
             tileNodeFSMMockIdle = new MockStatusIdle<TileNode>();
             tileNodeFSMSelected = new MockStatusSelected<TileNode>();
             _levelStateManager = new LevelStateManager<TileNode>(tileNodeFSMMockIdle, tileNodeMock);

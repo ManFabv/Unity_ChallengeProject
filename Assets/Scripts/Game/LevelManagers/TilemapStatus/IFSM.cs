@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PPop.Game.LevelManagers 
+namespace PPop.Game.LevelManagers.TilemapStatus
 {
     public interface IFSM<in T>
     {

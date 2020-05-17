@@ -1,6 +1,7 @@
 ﻿using System;
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
+using PPop.Game.LevelManagers.TilemapStatus;
 
 namespace PPop.Game.LevelManagers 
 {
