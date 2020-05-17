@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PPop.Domain.Levels;
 using PPop.Domain.Tiles;
 using PPop.Infrastructure.Services.Loader;
@@ -28,7 +29,14 @@ namespace PPop.Game.GridLevels
 
         public void LoadLevel(string pathToLevel)
         {
-            TilesData = _loaderService.Read<LevelTileData>(pathToLevel);
+            try
+            {
+                TilesData = _loaderService.Read<LevelTileData>(pathToLevel);
+            }
+            catch (NullReferenceException)
+            {
+                throw new ArgumentException($"Cannot read level file {pathToLevel}");
+            }
         }
 
         public void LoadLevel(string rootFolder, int level)

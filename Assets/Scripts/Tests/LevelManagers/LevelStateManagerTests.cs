@@ -3,7 +3,7 @@ using Zenject;
 using NUnit.Framework;
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
-using PPop.Game.LevelManagers.TilemapStatus;
+using PPop.Game.LevelManagers;
 using UnityEngine;
 
 namespace PPop.Tests.LevelManagers
@@ -45,14 +45,14 @@ namespace PPop.Tests.LevelManagers
             Assert.AreNotEqual(tileNodeFSMMockIdle.StateType(), tileNodeFSMSelected.StateType());
         }
 
-        private class MockStatusSelected<T> : Singleton<T>, IFSM<T> where T : TileNode, new() {
+        private class MockStatusSelected<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() {
             public void Init(T node) { }
             public void Execute(T node) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }
 
-        private class MockStatusIdle<T> : Singleton<T>, IFSM<T> where T : TileNode, new() {
+        private class MockStatusIdle<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() {
             public void Init(T node) { }
             public void Execute(T node) { }
             public void Exit(T node) { }

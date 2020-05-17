@@ -4,7 +4,6 @@ using NUnit.Framework;
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
 using PPop.Game.LevelManagers;
-using PPop.Game.LevelManagers.TilemapStatus;
 using UnityEngine;
 
 namespace PPop.Tests.LevelManagers
@@ -49,7 +48,7 @@ namespace PPop.Tests.LevelManagers
             Assert.Throws<ArgumentNullException>(() => _levelStateManager.ChangeState(null, tileNodeMock));
         }
 
-        private class MockStatusSelected<T> : Singleton<T>, IFSM<T> where T : TileNode, new() 
+        private class MockStatusSelected<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() 
         {
             public void Init(T node) { }
             public void Execute(T node) { }
@@ -57,7 +56,7 @@ namespace PPop.Tests.LevelManagers
             public Type StateType() => this.GetType();
         }
 
-        private class MockStatusIdle<T> : Singleton<T>, IFSM<T> where T : TileNode, new() 
+        private class MockStatusIdle<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() 
         {
             public void Init(T node) { }
             public void Execute(T node) { }

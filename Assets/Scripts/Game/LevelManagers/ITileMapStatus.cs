@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace PPop.Game.LevelManagers.TilemapStatus
+namespace PPop.Game.LevelManagers
 {
-    public interface IFSM<in T>
+    public interface ITileMapStatus<in T>
     {
         void Init(T node);
         void Execute(T node);

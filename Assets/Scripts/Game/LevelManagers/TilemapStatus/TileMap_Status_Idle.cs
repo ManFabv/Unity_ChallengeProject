@@ -1,21 +1,21 @@
-﻿using System;
-using PPop.Core.Helpers;
-using PPop.Domain.Tiles;
+﻿using PPop.Domain.Tiles;
 using UnityEngine;
 
 namespace PPop.Game.LevelManagers.TilemapStatus 
 {
-    public class TileMap_Status_Idle<T> : Singleton<T>, IFSM<T> where T : TileNode, new()
+    public class TileMap_Status_Idle<T> : TileMapStatusBase<T>, ITileMapStatus<T> where T : TileNode, new() 
     {
-        public void Init(T node) {}
+        public void Init(T node)
+        {
+            Debug.Log("Esperando click en inicio");
+        }
 
         public void Execute(T node)
         {
-            Debug.Log("Esperando click");
+            if(node != null)
+                Debug.Log("Cambiar de estado");
         }
 
         public void Exit(T node) {}
-
-        public Type StateType() => this.GetType();
     }
 }
