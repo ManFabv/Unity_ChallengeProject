@@ -8,7 +8,7 @@ using PPop.Infrastructure.Validators.Validators;
 using PPops.Domain.Statics.LevelStatics;
 using Zenject;
 
-namespace PPop.Tests.Domain.GridLevels
+namespace PPop.Tests.Game.GridLevels
 {
     [TestFixture]
     public class GridLevelTests : ZenjectUnitTestFixture

@@ -24,7 +24,7 @@ namespace PPop.Game.LevelManagers
 
         private TileNode _startTileNode;
         private TileNode _destinationTileNode;
-        private TileNode _selectedTileNode;
+        private TileBase _selectedTileNode;
         private ILevelStateManager<TileNode> _levelStateManager;
 
         [Inject] 
@@ -60,12 +60,12 @@ namespace PPop.Game.LevelManagers
                 Vector3 mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
                 Vector3Int coordinate = GridTileMap.WorldToCell(mouseWorldPos);
 
-                _selectedTileNode = TileMap.GetTile<TileNode>(coordinate);
+                _selectedTileNode = TileMap.GetTile<TileBase>(coordinate);
 
                 TileMap.SetColor(coordinate, Color.red);
             }
-
-            _levelStateManager.Execute(_selectedTileNode);
+            
+            _levelStateManager.Execute(_selectedTileNode as TileNode);
         }
     }
 }

@@ -12,8 +12,6 @@ namespace PPop.Game.LevelManagers.TilemapStatus
 
         public void Execute(T node)
         {
-            if(node != null)
-                Debug.Log("Cambiar de estado");
         }
 
         public void Exit(T node) {}

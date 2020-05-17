@@ -48,7 +48,6 @@ namespace PPop.Game.GridLevels
         public (Vector3Int[] positions, TileBase[] tiles) GetFilledMap()
         {
             var MapSize = TilesData.MapSize;
-            var mapSizeForArray = MapSize * MapSize;
             var halfMapSize = MapSize / 2;
 
             var level = TilesData.Level;
@@ -56,8 +55,8 @@ namespace PPop.Game.GridLevels
 
             var tileValidator = new TileValidator();
 
-            var positionArray = new Vector3Int[mapSizeForArray];
-            var tileArray = new TileBase[mapSizeForArray];
+            var positionArray = new List<Vector3Int>();
+            var tileArray = new List<TileBase>();
             TilesData.Tiles = new List<TileNode>();
         
             int mapIndex = 0;
@@ -65,13 +64,13 @@ namespace PPop.Game.GridLevels
             {
                 for (int xPos = -halfMapSize; xPos < halfMapSize; xPos++)
                 {
-                    _gridLevelFactory.InitializeTileMapTile(positionArray, mapIndex, xPos, yPos, tileArray, level);
+                    _gridLevelFactory.InitializeTileMapTile(positionArray, xPos, yPos, tileArray, level[mapIndex]);
                     _gridLevelFactory.InitializeTile(level, mapIndex, tileValidator, new Vector3Int(xPos, yPos, 0), TilesData.Tiles);
                     mapIndex++;
                 }
             }
-
-            return (positionArray, tileArray);
+            
+            return (positionArray.ToArray(), tileArray.ToArray());
         }
 
         public bool IsLoaded => TilesCount > 0;
