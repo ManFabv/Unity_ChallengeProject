@@ -3,10 +3,10 @@ using PPop.Domain.Tiles;
 
 namespace PPop.Game.LevelManagers 
 {
-    public interface ILevelStateManager
+    public interface ILevelStateManager<T> where T : TileNode, new() 
     {
-        void Execute(TileNode node);
-        void ChangeState(ITileMapStatus<TileNode> newState, TileNode node);
+        void Execute(T node);
+        void ChangeState(ITileMapStatus<T> newState, T node);
         Type GetCurrentState();
     }
 }

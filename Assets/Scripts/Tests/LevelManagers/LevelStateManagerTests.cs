@@ -15,7 +15,7 @@ namespace PPop.Tests.LevelManagers
         private MockStatusSelected<TileNode> tileNodeFSMSelected;
         private TileNode tileNodeMock;
         private MockStatusIdle<TileNode> tileNodeFSMMockIdle;
-        private ILevelStateManager levelStateManagerMock;
+        private ILevelStateManager<TileNode> levelStateManagerMock;
 
         [SetUp]
         public void CommonInstall()
@@ -23,7 +23,7 @@ namespace PPop.Tests.LevelManagers
             tileNodeFSMSelected = new MockStatusSelected<TileNode>();
             tileNodeMock = ScriptableObject.CreateInstance<TileNode>(); ;
             tileNodeFSMMockIdle = new MockStatusIdle<TileNode>();
-            levelStateManagerMock = new Mock<ILevelStateManager>().Object;
+            levelStateManagerMock = new Mock<ILevelStateManager<TileNode>>().Object;
         }
 
         [Test]
@@ -50,14 +50,14 @@ namespace PPop.Tests.LevelManagers
 
         private class MockStatusSelected<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() {
             public void Init(T node) { }
-            public void Execute(T node, ILevelStateManager levelStateManager) { }
+            public void Execute(T node, ILevelStateManager<T> levelStateManager) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }
 
         private class MockStatusIdle<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() {
             public void Init(T node) { }
-            public void Execute(T node, ILevelStateManager levelStateManager) { }
+            public void Execute(T node, ILevelStateManager<T> levelStateManager) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }

@@ -12,7 +12,7 @@ namespace PPop.Game.LevelManagers.TilemapStatus
             Debug.Log("TileMap_Status_Idle");
         }
 
-        public void Execute(TileNode node, ILevelStateManager levelStateManager)
+        public void Execute(TileNode node, ILevelStateManager<TileNode> levelStateManager)
         {
             if(node != null)
                 levelStateManager.ChangeState(TileMap_Status_SelectedStart.Instance, node);

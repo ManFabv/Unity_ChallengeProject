@@ -51,7 +51,7 @@ namespace PPop.Tests.LevelManagers
         private class MockStatusSelected<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() 
         {
             public void Init(T node) { }
-            public void Execute(T node, ILevelStateManager levelStateManager) { }
+            public void Execute(T node, ILevelStateManager<T> levelStateManager) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }
@@ -59,7 +59,7 @@ namespace PPop.Tests.LevelManagers
         private class MockStatusIdle<T> : Singleton<T>, ITileMapStatus<T> where T : TileNode, new() 
         {
             public void Init(T node) { }
-            public void Execute(T node, ILevelStateManager levelStateManager) { }
+            public void Execute(T node, ILevelStateManager<T> levelStateManager) { }
             public void Exit(T node) { }
             public Type StateType() => this.GetType();
         }

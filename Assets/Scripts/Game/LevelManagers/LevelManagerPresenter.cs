@@ -21,12 +21,12 @@ namespace PPop.Game.LevelManagers
 
         private Camera MainCamera;
         private Grid GridTileMap;
-        private ILevelStateManager _levelStateManager;
+        private ILevelStateManager<TileNode> _levelStateManager;
 
         private TileNode _selectedTileNode;
 
         [Inject] 
-        void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues, ILevelStateManager levelStateManager)
+        void Construct(ILevel level, IGameStaticsLevelValues gameStaticsLevelValues, ILevelStateManager<TileNode> levelStateManager)
         {
             _level = level;
             _gameStaticsLevelValues = gameStaticsLevelValues;

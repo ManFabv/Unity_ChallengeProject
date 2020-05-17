@@ -12,9 +12,5 @@ namespace PPop.Domain.Levels
 #pragma warning restore 0649
 
         public int TilesCount => TileNodes.Length;
-        public TileNode this[int index] {
-            get => TileNodes[index];
-            set => TileNodes[index] = value;
-        }
     }
 }

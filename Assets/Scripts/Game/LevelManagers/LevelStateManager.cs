@@ -4,7 +4,7 @@ using Zenject;
 
 namespace PPop.Game.LevelManagers 
 {
-    public class LevelStateManager : ILevelStateManager
+    public class LevelStateManager : ILevelStateManager<TileNode>
     {
         private ITileMapStatus<TileNode> _currentState;
 
