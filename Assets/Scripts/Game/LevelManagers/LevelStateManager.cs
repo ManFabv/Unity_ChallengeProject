@@ -1,5 +1,6 @@
 ﻿using System;
 using PPop.Domain.Tiles;
+using UnityEngine.Tilemaps;
 using Zenject;
 
 namespace PPop.Game.LevelManagers 
@@ -11,21 +12,21 @@ namespace PPop.Game.LevelManagers
         [Inject]
         public LevelStateManager(ITileMapStatus<TileNode> initialState, TileNode node)
         {
-            ChangeState(initialState, node);
+            ChangeState(initialState, node, new Tilemap());
         }
 
-        public void Execute(TileNode node)
+        public void Execute(TileNode node, Tilemap tilemap)
         {
-            _currentState.Execute(node, this);
+            _currentState.Execute(node, this, tilemap);
         }
 
-        public void ChangeState(ITileMapStatus<TileNode> newState, TileNode node)
+        public void ChangeState(ITileMapStatus<TileNode> newState, TileNode node, Tilemap tilemap)
         {
             if (newState is null) throw new ArgumentNullException($"New state {typeof(ITileMapStatus<TileNode>).Name} of parameter {nameof(newState)} is null");
 
-            _currentState?.Exit(node);
+            _currentState?.Exit(node, tilemap);
             _currentState = newState;
-            _currentState.Init(node);
+            _currentState.Init(node, tilemap);
         }
 
         public Type GetCurrentState() => _currentState.GetType();

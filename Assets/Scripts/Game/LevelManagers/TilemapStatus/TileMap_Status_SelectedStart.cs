@@ -2,24 +2,47 @@
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace PPop.Game.LevelManagers.TilemapStatus 
 {
-    public class TileMap_Status_SelectedStart : Singleton<TileMap_Status_SelectedStart>, ITileMapStatus<TileNode> 
+    public class TileMap_Status_SelectedStart : Singleton<TileMap_Status_SelectedStart>, ITileMapStatus<TileNode>
     {
-        public void Init(TileNode node)
+        private TileNode _startTileNode;
+        private TileNode _endTileNode;
+
+        public void Init(TileNode node, Tilemap tilemap)
         {
-            Debug.Log("TileMap_Status_SelectedStart");
+            _startTileNode = node;
         }
 
-        public void Execute(TileNode node, ILevelStateManager<TileNode> levelStateManager)
+        public void Execute(TileNode node, ILevelStateManager<TileNode> levelStateManager, Tilemap tilemap)
         {
             if (node != null)
-                levelStateManager.ChangeState(TileMap_Status_SelectedStart.Instance, node);
+            {
+                if(node == _startTileNode)
+                    levelStateManager.ChangeState(TileMap_Status_Idle.Instance, node, tilemap);
+                else
+                {
+                    if (node != _endTileNode)
+                    {
+                        if(_endTileNode != null) tilemap.SetColor(_endTileNode.Position, Color.white);
+
+                        _endTileNode = node;
+                        tilemap.SetColor(_endTileNode.Position, Color.red);
+
+                        //TODO: calcular el path
+                    }
+                    else
+                        levelStateManager.ChangeState(TileMap_Status_Idle.Instance, node, tilemap);
+                }
+            }
         }
 
-        public void Exit(TileNode node)
+        public void Exit(TileNode node, Tilemap tilemap)
         {
+            tilemap.SetColor(_startTileNode.Position, Color.white);
+            tilemap.SetColor(_endTileNode.Position, Color.white);
         }
 
         public Type StateType() => this.GetType();

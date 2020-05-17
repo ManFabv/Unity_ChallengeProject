@@ -52,6 +52,8 @@ namespace PPop.Game.LevelManagers
 
         void Update()
         {
+            _selectedTileNode = null;
+
             if (Input.GetMouseButtonDown(0))
             {
                 var mouseWorldPos = MainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -59,10 +61,8 @@ namespace PPop.Game.LevelManagers
 
                 _selectedTileNode = _level.GetTileNodeAtPosition(coordinate);
 
-                TileMap.SetColor(coordinate, Color.red);
-            }
-
-            _levelStateManager.Execute(_selectedTileNode);
+                _levelStateManager.Execute(_selectedTileNode, TileMap);
+            }   
         }
     }
 }
