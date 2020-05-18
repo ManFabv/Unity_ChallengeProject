@@ -1,4 +1,5 @@
-﻿using PPop.Domain.Levels;
+﻿using System.Linq;
+using PPop.Domain.Levels;
 using PPop.Domain.Tiles;
 using PPop.Infrastructure.Helpers.Tilemaps;
 using PPops.Domain.Statics.LevelStatics;
@@ -35,9 +36,11 @@ namespace PPop.Game.LevelManagers
 
         void Awake()
         {
-            MainCamera = Camera.main;
             TileMap = GetComponentInChildren<Tilemap>();
+            TileMap.CompressBounds();
             GridTileMap = GetComponent<Grid>();
+            TileNode.TileMap = TileMap;
+            MainCamera = Camera.main;
         }
 
         void Start()
@@ -60,7 +63,7 @@ namespace PPop.Game.LevelManagers
                 var coordinate = GridTileMap.WorldToCell(mouseWorldPos);
 
                 _selectedTileNode = _level.GetTileNodeAtPosition(coordinate);
-
+                
                 _levelStateManager.Execute(_selectedTileNode, TileMap);
             }   
         }

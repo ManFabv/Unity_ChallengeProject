@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using PathFinding;
 using PPop.Core.Helpers;
 using PPop.Domain.Tiles;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace PPop.Game.LevelManagers.TilemapStatus
     {
         private TileNode _startTileNode;
         private TileNode _endTileNode;
+        private IList<IAStarNode> _path;
 
         public void Init(TileNode node, Tilemap tilemap)
         {
@@ -29,9 +32,13 @@ namespace PPop.Game.LevelManagers.TilemapStatus
                         if(_endTileNode != null) tilemap.SetColor(_endTileNode.Position, Color.white);
 
                         _endTileNode = node;
-                        tilemap.SetColor(_endTileNode.Position, Color.red);
 
-                        //TODO: calcular el path
+                        //TODO: missing implementation
+                        //_path = GetTilesPath();
+                        //InitializeColorForPath(_path, tilemap);
+                        //TODO: this two lines for color should be removed
+                        tilemap.SetColor(_startTileNode.Position, Color.green);
+                        tilemap.SetColor(_endTileNode.Position, Color.green);
                     }
                     else
                         levelStateManager.ChangeState(TileMap_Status_Idle.Instance, node, tilemap);
@@ -43,8 +50,39 @@ namespace PPop.Game.LevelManagers.TilemapStatus
         {
             tilemap.SetColor(_startTileNode.Position, Color.white);
             tilemap.SetColor(_endTileNode.Position, Color.white);
+
+            if (_path != null)
+            {
+                foreach (var tile in _path)
+                {
+                    if (tile is TileNode tileNode)
+                        tilemap.SetColor(tileNode.Position, Color.white);
+                }
+            }
         }
 
         public Type StateType() => this.GetType();
+
+        private IList<IAStarNode> GetTilesPath()
+        {
+            if (_startTileNode is null) throw new ArgumentException($"{nameof(_startTileNode)} is null");
+            if (_endTileNode is null) throw new ArgumentException($"{nameof(_endTileNode)} is null");
+
+            return AStar.GetPath(_startTileNode, _endTileNode);
+        }
+
+        private void InitializeColorForPath(IList<IAStarNode> path, Tilemap tilemap)
+        {
+            if(path is null) throw new ArgumentException($"{nameof(path)} is null");
+
+            foreach (var tile in path)
+            {
+                if(tile is TileNode tileNode)
+                    tilemap.SetColor(tileNode.Position, Color.red);
+            }
+
+            tilemap.SetColor(_startTileNode.Position, Color.green);
+            tilemap.SetColor(_endTileNode.Position, Color.green);
+        }
     }
 }
