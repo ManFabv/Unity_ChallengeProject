@@ -33,12 +33,8 @@ namespace PPop.Game.LevelManagers.TilemapStatus
 
                         _endTileNode = node;
 
-                        //TODO: missing implementation
-                        //_path = GetTilesPath();
-                        //InitializeColorForPath(_path, tilemap);
-                        //TODO: this two lines for color should be removed
-                        tilemap.SetColor(_startTileNode.Position, Color.green);
-                        tilemap.SetColor(_endTileNode.Position, Color.green);
+                        _path = GetTilesPath();
+                        InitializeColorForPath(_path, tilemap);
                     }
                     else
                         levelStateManager.ChangeState(TileMap_Status_Idle.Instance, node, tilemap);

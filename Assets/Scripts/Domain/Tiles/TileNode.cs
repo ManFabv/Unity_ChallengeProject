@@ -5,7 +5,7 @@ using UnityEngine.Tilemaps;
 
 namespace PPop.Domain.Tiles
 {
-    public class TileNode : TileBase, IAStarNode
+    public class TileNode : Tile, IAStarNode
     {
         public static Tilemap TileMap;
         public int Cost;
@@ -55,16 +55,15 @@ namespace PPop.Domain.Tiles
             positions.Add(new Vector3Int(posXFrom, Position.y - 1, Position.z));
             positions.Add(new Vector3Int(posXTo, Position.y - 1, Position.z));
 
-            List<IAStarNode> neighbours = new List<IAStarNode>();
+            var neighbors = new List<IAStarNode>();
             
             foreach (var tilePosition in positions)
             {
                 var tileNode = TileMap.GetTile<TileNode>(tilePosition);
-                
-                neighbours.Add(tileNode);
+                neighbors.Add(tileNode);
             }
 
-            return neighbours;
+            return neighbors;
         }
     }
 }

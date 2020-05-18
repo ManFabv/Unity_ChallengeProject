@@ -8,6 +8,6 @@ namespace PPop.Game.GridLevels
     {
         void InitializeTile(string[] level, int mapIndex, Vector3Int tilePosition, TileNode[] tiles);
 
-        void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, TileBase[] tileBaseArray, string levelRepresentation);
+        void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, Tile[] tileBaseArray, string levelRepresentation);
     }
 }

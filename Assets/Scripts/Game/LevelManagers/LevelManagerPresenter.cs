@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using PPop.Domain.Levels;
+﻿using PPop.Domain.Levels;
 using PPop.Domain.Tiles;
+using PPop.Infrastructure.Exceptions;
 using PPop.Infrastructure.Helpers.Tilemaps;
 using PPops.Domain.Statics.LevelStatics;
 using UnityEngine;
@@ -48,6 +48,8 @@ namespace PPop.Game.LevelManagers
             _level.LoadLevel(_gameStaticsLevelValues.LevelRootFolder, CurrentLevel);
         
             var map = _level.GetFilledMap();
+
+            if (map.tiles is null) throw new PPopConfigurationException("Tiles couldn't be loaded");
 
             TileMap.SetTiles(map.positions, map.tiles);
             TileMap.ClearAllTileMapFlags(map.positions);
