@@ -1,5 +1,6 @@
 ﻿using PPop.Domain.Levels;
 using PPop.Domain.Tiles;
+using PPop.Infrastructure.Exceptions;
 using PPop.Infrastructure.Helpers.Tilemaps;
 using PPops.Domain.Statics.LevelStatics;
 using UnityEngine;
@@ -35,9 +36,11 @@ namespace PPop.Game.LevelManagers
 
         void Awake()
         {
-            MainCamera = Camera.main;
             TileMap = GetComponentInChildren<Tilemap>();
+            TileMap.CompressBounds();
             GridTileMap = GetComponent<Grid>();
+            TileNode.TileMap = TileMap;
+            MainCamera = Camera.main;
         }
 
         void Start()
@@ -45,6 +48,8 @@ namespace PPop.Game.LevelManagers
             _level.LoadLevel(_gameStaticsLevelValues.LevelRootFolder, CurrentLevel);
         
             var map = _level.GetFilledMap();
+
+            if (map.tiles is null) throw new PPopConfigurationException("Tiles couldn't be loaded");
 
             TileMap.SetTiles(map.positions, map.tiles);
             TileMap.ClearAllTileMapFlags(map.positions);
@@ -60,7 +65,7 @@ namespace PPop.Game.LevelManagers
                 var coordinate = GridTileMap.WorldToCell(mouseWorldPos);
 
                 _selectedTileNode = _level.GetTileNodeAtPosition(coordinate);
-
+                
                 _levelStateManager.Execute(_selectedTileNode, TileMap);
             }   
         }

@@ -5,22 +5,65 @@ using UnityEngine.Tilemaps;
 
 namespace PPop.Domain.Tiles
 {
-    public class TileNode : TileBase, IAStarNode
+    public class TileNode : Tile, IAStarNode
     {
+        public static Tilemap TileMap;
         public int Cost;
         public string Representation;
         public Vector3Int Position;
 
-        public IEnumerable<IAStarNode> Neighbours => throw new System.NotImplementedException();
+        public IEnumerable<IAStarNode> Neighbours => FindNeighbours();
 
         public float CostTo(IAStarNode neighbour)
         {
-            throw new System.NotImplementedException();
+            float cost = Cost;
+            if (neighbour is TileNode tileNode)
+                cost = tileNode.Cost + Cost;
+
+            return cost;
         }
 
         public float EstimatedCostTo(IAStarNode target)
         {
-            throw new System.NotImplementedException();
+            return CostTo(target);
+        }
+
+        private IEnumerable<IAStarNode> FindNeighbours()
+        {
+            var positions = new List<Vector3Int>();
+            int posXFrom = 0;
+            int posXTo = 0;
+            if (Position.y%2 == 0)
+            {
+                posXFrom = Position.x - 1;
+                posXTo = Position.x;
+            }
+
+            else
+            {
+                posXFrom = Position.x;
+                posXTo = Position.x + 1;
+            }
+
+            positions.Add(new Vector3Int(posXFrom, Position.y+1, Position.z));
+            positions.Add(new Vector3Int(posXTo, Position.y+1, Position.z));
+
+            positions.Add(new Vector3Int(Position.x - 1, Position.y, Position.z));
+            positions.Add(new Vector3Int(Position.x, Position.y, Position.z));
+            positions.Add(new Vector3Int(Position.x + 1, Position.y, Position.z));
+
+            positions.Add(new Vector3Int(posXFrom, Position.y - 1, Position.z));
+            positions.Add(new Vector3Int(posXTo, Position.y - 1, Position.z));
+
+            var neighbors = new List<IAStarNode>();
+            
+            foreach (var tilePosition in positions)
+            {
+                var tileNode = TileMap.GetTile<TileNode>(tilePosition);
+                neighbors.Add(tileNode);
+            }
+
+            return neighbors;
         }
     }
 }
