@@ -44,7 +44,7 @@ namespace PPop.Game.GridLevels
             LoadLevel(pathToFile);
         }
 
-        public (Vector3Int[] positions, Tile[] tiles) GetFilledMap()
+        public (Vector3Int[] positions, TileBase[] tiles) GetFilledMap()
         {
             var mapSize = TilesData.MapSize;
             var halfMapSize = mapSize / 2;
@@ -54,7 +54,7 @@ namespace PPop.Game.GridLevels
             
             var tileNodeArray = new TileNode[fullMapSize];
             var tilePositionArray = new Vector3Int[fullMapSize];
-            var tileBaseArray = new Tile[fullMapSize];
+            var tileBaseArray = new TileBase[fullMapSize];
         
             int mapIndex = 0;
             for (int yPos = halfMapSize; yPos > -halfMapSize; yPos--)

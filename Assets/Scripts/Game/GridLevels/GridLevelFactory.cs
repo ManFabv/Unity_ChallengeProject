@@ -38,10 +38,10 @@ namespace PPop.Game.GridLevels
             tiles[mapIndex] = tile;
         }
 
-        public void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, Tile[] tileBaseArray, string levelRepresentation)
+        public void InitializeTileMapTile(Vector3Int[] positionArray, int mapIndex, int xPos, int yPos, TileBase[] tileBaseArray, string levelRepresentation)
         {
             positionArray[mapIndex] = new Vector3Int(xPos, yPos, 0);
-            tileBaseArray[mapIndex] = _reader.Read<Tile>(levelRepresentation);
+            tileBaseArray[mapIndex] = _reader.Read<TileBase>(levelRepresentation);
         }
     }
 }

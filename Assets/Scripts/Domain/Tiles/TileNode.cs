@@ -28,6 +28,7 @@ namespace PPop.Domain.Tiles
             return CostTo(target);
         }
 
+        //TODO: this needs a correct implementation
         private IEnumerable<IAStarNode> FindNeighbours()
         {
             var positions = new List<Vector3Int>();
