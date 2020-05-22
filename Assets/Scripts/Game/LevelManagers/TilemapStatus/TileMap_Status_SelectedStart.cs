@@ -12,7 +12,7 @@ namespace PPop.Game.LevelManagers.TilemapStatus
     {
         private TileNode _startTileNode;
         private TileNode _endTileNode;
-        private IList<IAStarNode> _path;
+        // private IList<IAStarNode> _path;
 
         public void Init(TileNode node, Tilemap tilemap)
         {
@@ -51,14 +51,15 @@ namespace PPop.Game.LevelManagers.TilemapStatus
             tilemap.SetColor(_startTileNode.Position, Color.white);
             tilemap.SetColor(_endTileNode.Position, Color.white);
 
-            if (_path != null)
-            {
-                foreach (var tile in _path)
-                {
-                    if (tile is TileNode tileNode)
-                        tilemap.SetColor(tileNode.Position, Color.white);
-                }
-            }
+            //TODO: this should be uncommented when done implementation of AStar
+            // if (_path != null)
+            // {
+            //     foreach (var tile in _path)
+            //     {
+            //         if (tile is TileNode tileNode)
+            //             tilemap.SetColor(tileNode.Position, Color.white);
+            //     }
+            // }
         }
 
         public Type StateType() => this.GetType();
